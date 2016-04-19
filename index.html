@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Auroras.live Developers Documentation">
+  <meta name="author" content="auroras.live">
+
+  <title>Auroras.live Developers</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Auroras.live Documentation</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="http://auroras.live">Go to Auroras.live</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="list-group">
+          <a href="#introduction" class="list-group-item">Introduction</a>
+          <a href="#timezone" class="list-group-item">About Timezones</a>
+          <a href="#formatting" class="list-group-item">About Formatting</a>
+          <a href="#colours" class="list-group-item">About Colouring</a>
+          <a href="#all" class="list-group-item">All Module</a>
+          <a href="#ace" class="list-group-item">ACE Module</a>
+          <a href="#archive" class="list-group-item">Archive Module</a>
+          <a href="#embed" class="list-group-item">Image Embed Module</a>
+          <a href="#images" class="list-group-item">Images Module</a>
+          <a href="#weather" class="list-group-item">Weather Module</a>
+        </div>
+      </div>
+
+      <div class="col col-md-10">
+        <h1 id="introduction">Introduction</h1>
+        <span>
+          <p>The auroras.live API allows you to obtain key aurora hunting information and access extensive data archives. It's also the system used by the auroras.live website, Pebble watch app and mobile apps</p>
+          <h2 id="introduction-usage">Usage</h2>
+          <p>Data can be passed to the API via GET or POST, using the endpoints listed below</p>
+          <h3>Endpoints</h3>
+          <h4>Non secure</h4>
+          <pre>http://api.auroras.live/v1/</pre>
+          <h4>Secure</h4>
+          <pre>https://api.auroras.live/v1/</pre>
+        </span>
+        <h2 id="timezone">About Timezones</h2>
+        <span>
+          <p>By default, all dates and times returned are in UTC. By appending
+            <code>tz</code> to your request, you can convert those times and dates into your local time.
+            <code>tz</code> is an offset, in minutes. If you're accessing the API via Javascript, you can simply use
+            <code>new Date().getTimezoneOffset()</code>
+          </p>
+          <h3>Example</h3>
+          <pre>http://api.auroras.live/v1/?type=ace&data=bz&tz=-660</pre>
+          <h3>Returns</h3>
+          <pre>
+{
+  "date": "2016-03-31T02:53:16+11:00",
+  "bz": "1.7",
+  "colour": "yellow"
+}
+        </pre>
+        </span>
+        <h2 id="formatting">About Formatting (BETA)</h2>
+        <span>
+          <p>By default, all data returned will be in JSON format. You can return data as XML by appending <code>format=xml</code> to your request</p>
+          <p>Please note that XML may not work on all types, for exampmle <code>ace/threeday</code> will return unexpected data. These issues are being investigated</p>
+          <h3>Example</h3>
+          <pre>http://api.auroras.live/v1/?type=ace&data=bz&format=xml</pre>
+          <h3>Returns</h3>
+          <pre>&lt;data&gt;
+    &lt;date&gt;2016-03-30T16:00:28+00:00&lt;/date&gt;
+    &lt;bz&gt;2.5&lt;/bz&gt;
+    &lt;colour&gt;yellow&lt;/colour&gt;
+&lt;/data&gt;
+          </pre>
+        </span>
+        <h2 id="colour">About Colouring</h2>
+        <span>
+          <p>Many data types will return a colour along with the information. This is to give hunters a relative idea of activity, and also to help programmers write code without having to add in lengthy checks to map values to colours. You can change the colour format returned by appending <code>colour=hex</code> or <code>colour=rgb</code> to the end of your request</p>
+          <table class="table table-striped table-hover">
+            <tr>
+              <th>Data</th>
+              <th>Value 1</th>
+              <th>Value 2</th>
+              <th>Colour Name</th>
+              <th>Hex Colour</th>
+              <th>CSS RGB Colour</th>
+            </tr>
+            <tr>
+              <td>Bz</td>
+              <td>&lt;= -15</td>
+              <td></td>
+              <td>red</td><td><code>#FF0000</code></td><td><code>rgb(255,0,0)</code></td>
+            </tr>
+            <tr>
+              <td>Bz</td>
+              <td>&gt; -15 </td><td> &lt;= -10</td>
+              <td>orange</td><td><code>#FF8000</code></td><td><code>rgb(255,128,0)</code></td>
+            </tr>
+            <tr>
+              <td>Bz</td>
+              <td>&gt; -10 </td><td> &lt; 0</td>
+              <td>yellow</td><td><code>#FFFF00</code></td><td><code>rgb(255,255,0)</code></td>
+            </tr>
+            <tr>
+              <td>Bz</td>
+              <td>&gt;= 0</td>
+              <td></td>
+              <td>green</td><td><code>#00FF00</code></td><td><code>rgb(0,255,0)</code></td>
+            </tr>
+
+            <tr>
+              <td>Speed</td>
+              <td>&gt;= 700</td>
+              <td></td>
+              <td>red</td><td><code>#FF0000</code></td><td><code>rgb(255,0,0)</code></td>
+            </tr>
+            <tr>
+              <td>Speed</td>
+              <td>&gt;= 500 </td><td> &lt; 700</td>
+              <td>orange</td><td><code>#FF8000</code></td><td><code>rgb(255,128,0)</code></td>
+            </tr>
+            <tr>
+              <td>Speed</td>
+              <td>&gt;= 350 </td><td> &lt; 500</td>
+              <td>yellow</td><td><code>#FFFF00</code></td><td><code>rgb(255,255,0)</code></td>
+            </tr>
+            <tr>
+              <td>Speed</td>
+              <td>&lt; 350</td>
+              <td></td>
+              <td>green</td><td><code>#00FF00</code></td><td><code>rgb(0,255,0)</code></td>
+            </tr>
+
+            <tr>
+              <td>Density</td>
+              <td>&gt;= 15</td>
+              <td></td>
+              <td>red</td><td><code>#FF0000</code></td><td><code>rgb(255,0,0)</code></td>
+            </tr>
+            <tr>
+              <td>Density</td>
+              <td>&gt;= 10 </td><td> &lt; 15</td>
+              <td>orange</td><td><code>#FF8000</code></td><td><code>rgb(255,128,0)</code></td>
+            </tr>
+            <tr>
+              <td>Density</td>
+              <td>&gt;= 4 </td><td> &lt; 10</td>
+              <td>yellow</td><td><code>#FFFF00</code></td><td><code>rgb(255,255,0)</code></td>
+            </tr>
+            <tr>
+              <td>Density</td>
+              <td>&gt; 0 </td><td> &lt; 4</td>
+              <td>green</td><td><code>#00FF00</code></td><td><code>rgb(0,255,0)</code></td>
+            </tr>
+
+            <tr>
+              <td>Kp</td>
+              <td>&gt; 6</td>
+              <td></td>
+              <td>red</td><td><code>#FF0000</code></td><td><code>rgb(255,0,0)</code></td>
+            </tr>
+            <tr>
+              <td>Kp</td>
+              <td>&gt;= 5 </td><td> &lt; 6</td>
+              <td>orange</td><td><code>#FF8000</code></td><td><code>rgb(255,128,0)</code></td>
+            </tr>
+            <tr>
+              <td>Kp</td>
+              <td>&gt;= 3 </td><td> &lt;= 4</td>
+              <td>yellow</td><td><code>#FFFF00</code></td><td><code>rgb(255,255,0)</code></td>
+            </tr>
+            <tr>
+              <td>Kp</td>
+              <td>&lt; 3</td>
+              <td></td>
+              <td>green</td><td><code>#00FF00</code></td><td><code>rgb(0,255,0)</code></td>
+            </tr>
+
+            <tr>
+              <td>Nowcast</td>
+              <td>&gt;= 75 </td><td> &lt;= 100</td>
+              <td>red</td><td><code>#FF0000</code></td><td><code>rgb(255,0,0)</code></td>
+            </tr>
+            <tr>
+              <td>Nowcast</td>
+              <td>&gt;= 50 </td><td> &lt; 75</td>
+              <td>orange</td><td><code>#FF8000</code></td><td><code>rgb(255,128,0)</code></td>
+            </tr>
+            <tr>
+              <td>Nowcast</td>
+              <td>&gt;= 25 </td><td> &lt; 50</td>
+              <td>yellow</td><td><code>#FFFF00</code></td><td><code>rgb(255,255,0)</code></td>
+            </tr>
+            <tr>
+              <td>Nowcast</td>
+              <td>&gt;= 0 </td><td> &lt; 25</td>
+              <td>green</td><td><code>#00FF00</code></td><td><code>rgb(0,255,0)</code></td>
+            </tr>
+
+          </table>
+
+        </span>
+        <h1 id="modules">Modules</h1>
+          <p>There are a few "modules" that the API exposes that you can access, and they're listed below. Pay special attention to spelling, as words are spelled using British English (e.g. colo<b>u</b>r)</p>
+        <h2 id="all">All Module</h2>
+        <span>
+          <p>The &quot;All&quot; module bundles up a variety of information from the other modules and returns it to the user. This data is most commonly used for apps and web services, where you don't want to make multiple calls to retrieve data. The data returned includes</p>
+          <ul>
+            <li>ACE data (speed, density, Bz, Kp, Kp 1 hour, Kp 4 hour)</li>
+            <li>Three day Kp forecast</li>
+            <li>Weather for the specified location</li>
+            <li>9 day weather forecast</li>
+            <li>Probability of seeing an aurora overhead, along with calculated data showing possible auroral activity within a 9 degree (approximately 500km) radius, and the coordinates of the location with the highest chance of seeing an aurora overhead</li>
+          </ul>
+          <h3>Usage</h3>
+          <span>
+            <pre>http://api.auroras.live/v1/?type=all&lat=-37.663712&long=144.844788</pre>
+            <h3>Required Parameters</h3>
+            <h4><code>lat</code></h4>
+            <p>The latitude of the area you wish to obtain information for</p>
+            <h4><code>long</code></h4>
+            <p>The longitude of the area you wish to obtain information for</p>
+            <h3>Optional Parameters</h3>
+            <h4><code>ace</code></h4>
+            <p>Must be <code>true</code> or <code>false</code>. Defaults to <code>true</code>. If false, data from SWPC is not included</p>
+            <h4><code>weather</code></h4>
+            <p>Must be <code>true</code> or <code>false</code>. If false, weather information (including forecast) is not included</p>
+
+          </span>
+        </span>
+        <hr />
+        <h2 id="all">ACE Module</h2>
+        <span>
+          <p>The ACE module is the core of the API. It returns information obtained from ACE spacecraft, though it also returns information from the <a href="http://www.swpc.noaa.gov/">NOAA SWPC</a>. This information includes the basic elements used in aurora hunting, such as Bz, speed, density and Kp</p>
+          <h2>Usage</h2>
+          <span>
+            <pre>http://api.auroras.live/v1/?type=ace&data=kp</pre>
+            <h2>Parameters</h2>
+            <h3><code>data</code></h3>
+            <p>Required. The type of information you wish to retrieve. Valid data types include:</p>
+            <ul>
+              <li><code>bz</code> - Bz, which is the direction of the interplanetary magnetic field (IMF)</li>
+              <li><code>density</code> - Proton density</li>
+              <li><code>speed</code> - Proton speed</li>
+              <li><code>kp</code> - Current, 1 hour and 4 hour Kp readings</li>
+              <li><code>threeday</code> - Three day Kp forecast</li>
+              <li><code>nowcast</code> - Retrieves aurora visibility predictions</li>
+              <li><code>all</code> - Everything above, except for nowcast</li>
+            </ul>
+            <h2>Details</h2>
+            <h3><code>bz</code></h3>
+            <p>The direction of the Interplanetary Magnetic Field (IMF) in nanoteslas</p>
+            <p>Requires no other parameters</p>
+            <h4>Example</h4>
+            <pre>http://api.auroras.live/v1/?type=ace&data=bz</pre>
+            <pre>{
+  "date": "2016-03-31T07:05:37+00:00",
+  "bz": "-1.5",
+  "colour": "yellow"
+}</pre>
+            <h3><code>density</code></h3>
+            <p>Proton density in p/cc</p>
+            <p>Requires no other parameters</p>
+            <h3><code>speed</code></h3>
+            <p>Speed of the particles in km/s</p>
+            <p>Requires no other parameters</p>
+            <h3><code>kp</code></h3>
+            <p>Current Kp, as well as 1 hour and 4 hour Kp predictions</p>
+            <p>Requires no other parameters</p>
+            <h3><code>nowcast</code></h3>
+            <p>A percentage value indicating how likely you are to see an aurora directly overhead. Auroras.live does further calculations to determine how likely you are to see an aurora within 500km. This is useful for Australians who generally can only see auroras towards the horizon</p>
+            <h4>Required Parameters</h4>
+            <h5><code>lat</code> - Current latitude, <code>-90</code> to <code>90</code></h5>
+            <h5><code>long</code> - Current longitude, <code>-180</code> to <code>180</code></h5>
+
+
+
+
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
