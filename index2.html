@@ -332,6 +332,8 @@ String. The end date for retrieving data. **Only required if action = `search` a
 ### Notes
 When `tz` is set, the search query AND data are modified. So for example if you're looking for data for an event that happened at 1am local time, you _do not_ need to convert and search in UTC. Simply pass `start` and `end` in your _local times_, then set `tz` accordingly:
 
+# NOTE: NEED TO CHANGE THIS BEHAVIOUR
+
 `http://api.auroras.live/v1/?type=archive&action=search&start=1am&end=1am`
 ```json
 {
@@ -384,7 +386,56 @@ When `tz` is set, the search query AND data are modified. So for example if you'
 }
 ```
 
+## Images
+The images module caches and returns images from various webcams, charts, satellite and models.
 
+### Usage
+To retrieve a list of images available:
+`http://api.auroras.live/v1/?type=images&action=list`
+
+To retrieve an image
+`http://api.auroras.live/v1/?type=images&image=cressy`
+
+### Returns
+
+```json
+{
+    "categories": {
+        "cam": {
+            "name": "Aurora Cameras",
+            "description": "Aurora Cameras from around the world"
+        },
+        "satellite": {
+            "name": "Satellite Images",
+            "description": "Satellite Images and models based on satellite images"
+        },
+        "chart": {
+            "name": "Charts and Graphs",
+            "description": "Charts and graphs, including magnetometers"
+        }
+    },
+    "images": {
+        "cressy": {
+            "id": "cressy",
+            "name": "Cressy Aurora Cam",
+            "description": "Aurora camera in Cressy, Tasmania",
+            "cache": 180,
+            "url": "http:\/\/www.sws.bom.gov.au\/Images\/Geophysical\/Aurora\/Aurora%20Patrol%20Camera\/latest.jpg",
+            "category": "cam"
+        },
+        "kevo": {
+            "id": "kevo",
+            "name": "Kevo Aurora Cam",
+            "description": "Aurora camera in Kevo, Finland",
+            "cache": 3000,
+            "url": "http:\/\/aurora.fmi.fi\/public_service\/latest_KEV.jpg",
+            "category": "cam"
+        },
+
+[...]
+```
+
+![Cressy Webcam](http://beta.api.auroras.live/v1/?type=images&image=cressy)
 </xmp>
 
 <script src="v/0.2/strapdown.js"></script>
