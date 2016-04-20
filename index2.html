@@ -257,6 +257,7 @@ Obtaining statistics about the archive
 `http://api.auroras.live/v1/?type=archive&action=stats`
 
 Obtaining archive data for the February 1st 2016, between midnight and 1am
+`http://api.auroras.live/v1/?type=archive&action=search&start=2016-02-01T00:00&end=2016-02-01T01:00`
 
 ### Returns
 Archive statistics:
@@ -270,8 +271,118 @@ Archive statistics:
     "size": "1294.14"
 }
 ```
-Size is in megabytes
+(NB: Size is in megabytes)
 
+Archive results:
+```json
+{
+    "2016-02-01 00:00:00": {
+        "Date": "2016-02-01 00:00:00",
+        "JulianDay": "57419",
+        "SecondsDay": "0",
+        "Status": "0",
+        "Bx": "4.2",
+        "By": "4.8",
+        "Bz": "-5.8",
+        "Bt": "8.7",
+        "Lat": "-42.1",
+        "Long": "48.9",
+        "ProtonDensity": "4.4",
+        "BulkSpeed": "303.1",
+        "IonTemperature": "3.33e+04",
+        "Date1Hour": "2016-02-01 01:00:00",
+        "Kp1Hour": "1.67",
+        "Date4Hour": "2016-02-01 04:00:00",
+        "Kp4Hour": "1.67",
+        "Kp": "1.67"
+    },
+    "2016-02-01 00:01:00": {
+        "Date": "2016-02-01 00:01:00",
+        "JulianDay": "57419",
+        "SecondsDay": "60",
+        "Status": "0",
+        "Bx": "4.4",
+        "By": "4.6",
+        "Bz": "-5.9",
+        "Bt": "8.7",
+        "Lat": "-42.7",
+        "Long": "45.9",
+        "ProtonDensity": "4.2",
+        "BulkSpeed": "303.0",
+        "IonTemperature": "3.59e+04"
+    },
+
+    [...]
+```
+
+### Required Parameters
+
+#### action
+String. The type of action to take. Valid values are:
+
+ - `stats` - Returns statistics about the archive, including start and end dates and the size of the databases in megabytes
+ - `search` - Returns archived data, given a start and end date
+
+#### start
+String. The date to begin retrieving data from. **Only required if action = `search` and MUST be a valid PHP date**
+
+#### end
+String. The end date for retrieving data. **Only required if action = `search` and MUST be a valid PHP date**
+
+### Notes
+When `tz` is set, the search query AND data are modified. So for example if you're looking for data for an event that happened at 1am local time, you _do not_ need to convert and search in UTC. Simply pass `start` and `end` in your _local times_, then set `tz` accordingly:
+
+`http://api.auroras.live/v1/?type=archive&action=search&start=1am&end=1am`
+```json
+{
+    "2016-04-20 01:00:00": {
+        "Date": "2016-04-20 01:00:00",
+        "JulianDay": "57498",
+        "SecondsDay": "3600",
+        "Status": "0",
+        "Bx": "-0.7",
+        "By": "6.3",
+        "Bz": "0.4",
+        "Bt": "6.4",
+        "Lat": "3.5",
+        "Long": "95.9",
+        "ProtonDensity": "6.9",
+        "BulkSpeed": "352.7",
+        "IonTemperature": "3.09e+04",
+        "Date1Hour": "2016-04-20 02:00:00",
+        "Kp1Hour": "0.33",
+        "Date4Hour": "2016-04-20 05:00:00",
+        "Kp4Hour": "0.00",
+        "Kp": "1.00"
+    }
+}
+```
+
+`http://api.auroras.live/v1/?type=archive&action=search&start=1am&end=1am&tz=-660`
+```json
+{
+    "2016-04-20 12:00:00": {
+        "Date": "2016-04-20 12:00:00",
+        "JulianDay": "57498",
+        "SecondsDay": "3600",
+        "Status": "0",
+        "Bx": "-0.7",
+        "By": "6.3",
+        "Bz": "0.4",
+        "Bt": "6.4",
+        "Lat": "3.5",
+        "Long": "95.9",
+        "ProtonDensity": "6.9",
+        "BulkSpeed": "352.7",
+        "IonTemperature": "3.09e+04",
+        "Date1Hour": "2016-04-20 02:00:00",
+        "Kp1Hour": "0.33",
+        "Date4Hour": "2016-04-20 05:00:00",
+        "Kp4Hour": "0.00",
+        "Kp": "1.00"
+    }
+}
+```
 
 
 </xmp>
