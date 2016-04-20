@@ -37,6 +37,9 @@ Array. The requested data will return, **if present**, important messages in the
 }
 ```
 
+## Dates
+All data returned will include a `date` property, offset by whatever timezone you pass to it (see the section on Timezones below)
+
 ## Timezones
 By default, all dates and times returned are in UTC. By appending `tz` to your request and passing an offset, in minutes, you can convert most of these times and dates into your local timezone. If you're accessing the API via Javascript (e.g. an AngularJS app), you can simply use `new Date().getTimezoneOffset()` to obtain the offset.
 
@@ -206,6 +209,69 @@ Integer. The latitude of the location you wish to retrieve probability info for.
 
 #### long
 Integer. The longitude of the location you wish to retrieve probability info for. Valid ranges are from `-180` to `180`. **Only necessary if requesting probability data**
+
+## Embed
+The embed module returns an image containing various ACE data, allowing the information to be embedded in a forum signature, website etc. You have the option of using current data, or passing in custom values (to show data for a moment in time, for example)
+
+### Usage
+`http://api.auroras.live/v1/?type=embed&size=normal`
+
+### Returns
+![Current ACE data](http://beta.api.auroras.live/v1/?type=embed&size=normal)
+
+### Required Parameters
+There are no required parameters
+
+### Optional Parameters
+
+#### size
+String. Defaults to "regular" (actually defaults to "none" internally, for analytics purposes). Used to show one of three possible sizes:
+
+ - `regular` (450x250)
+ - `small` (338x188)
+ - `xsmall` (254x141)
+
+#### bz
+Integer. The Bz value to show. **If this parameter is passed, then you MUST pass all other optional parameters below!**
+
+#### speed
+Integer. The speed to show.
+
+#### density
+Integer. The density to show
+
+#### kp
+Integer. The Kp to show
+
+### kp1hour
+Integer. The 1 hour Kp forecast to show
+
+#### date
+String. The date to show at the top of the image. **MUST be a valid PHP date (e.g. "now", "midnight yesterday", "2013-01-01 00:00")**
+
+## Archive
+The Archive module lets you search through previous years' data. Due to the amount of data stored, you can only search for three days worth of data in a single call.
+
+### Usage
+Obtaining statistics about the archive
+`http://api.auroras.live/v1/?type=archive&action=stats`
+
+Obtaining archive data for the February 1st 2016, between midnight and 1am
+
+### Returns
+Archive statistics:
+
+```json
+{
+    "start": "2000-08-01T00:00:00+00:00",
+    "end": "2016-04-20T03:07:00+00:00",
+    "kpstart": "2016-01-06T12:00:00+00:00",
+    "kpend": "2016-04-20T03:00:00+00:00",
+    "size": "1294.14"
+}
+```
+Size is in megabytes
+
 
 
 </xmp>
