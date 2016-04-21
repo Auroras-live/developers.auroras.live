@@ -1,911 +1,565 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Developers.auroras.live by Grayda</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Developers.auroras.live</h1>
-      <h2 class="project-tagline">Documentation for the Auroras.live API</h2>
-      <a href="https://github.com/Grayda/developers.auroras.live" class="btn">View on GitHub</a>
-      <a href="https://github.com/Grayda/developers.auroras.live/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/Grayda/developers.auroras.live/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+<html>
+<title>api.auroras.live Documentation</title>
 
-    <section class="main-content">
-      <ul>
-<li>
-<a href="#introduction">Introduction</a>
+<xmp theme="cerulean" style="display:none;">
+  - [Introduction](#introduction)
+  	- [Usage](#usage)
+  	- [Important Messages](#important-messages)
+  	- [Dates](#dates)
+  	- [Timezones](#timezones)
+  	- [Formatting (BETA)](#formatting-beta)
+  	- [Colouring](#colouring)
+  - [Modules](#modules)
+  	- [All](#all)
+  	- [ACE](#ace)
+  	- [Embed](#embed)
+  	- [Archive](#archive)
+  	- [Images](#images)
+  	- [Weather](#weather)
 
-<ul>
-<li><a href="#usage">Usage</a></li>
-<li><a href="#important-messages">Important Messages</a></li>
-<li><a href="#dates">Dates</a></li>
-<li><a href="#timezones">Timezones</a></li>
-<li><a href="#formatting-beta">Formatting (BETA)</a></li>
-<li><a href="#colouring">Colouring</a></li>
-</ul>
-</li>
-<li>
-<a href="#modules">Modules</a>
+# Introduction
+The auroras.live API allows you to obtain key aurora hunting information and access extensive data archives. It's also the system used by the auroras.live website, Pebble watch app and mobile apps
 
-<ul>
-<li><a href="#all">All</a></li>
-<li><a href="#ace">ACE</a></li>
-<li><a href="#embed">Embed</a></li>
-<li><a href="#archive">Archive</a></li>
-<li><a href="#images">Images</a></li>
-<li><a href="#weather">Weather</a></li>
-</ul>
-</li>
-</ul>
+-----------------------------------------------------
+## Usage
 
-<h1>
-<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h1>
+Data can be passed to the API via GET or POST, using the endpoints listed below
 
-<p>The auroras.live API allows you to obtain key aurora hunting information and access extensive data archives. It's also the system used by the auroras.live website, Pebble watch app and mobile apps</p>
+### Endpoints
+#### Non-secure
+`http://api.auroras.live`
+#### Secure
+`https://api.auroras.live`
 
-<hr>
+-----------------------------------------------------
+## Important Messages
+Please keep an eye on this website for information about the API. Important information will also be included along with any data retrieved from the API.
 
-<h2>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+### Example
+`http://api.auroras.live/v1/?type=ace&data=bz`
 
-<p>Data can be passed to the API via GET or POST, using the endpoints listed below</p>
-
-<h3>
-<a id="endpoints" class="anchor" href="#endpoints" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Endpoints</h3>
-
-<h4>
-<a id="non-secure" class="anchor" href="#non-secure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Non-secure</h4>
-
-<p><code>http://api.auroras.live</code></p>
-
-<h4>
-<a id="secure" class="anchor" href="#secure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Secure</h4>
-
-<p><code>https://api.auroras.live</code></p>
-
-<hr>
-
-<h2>
-<a id="important-messages" class="anchor" href="#important-messages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Important Messages</h2>
-
-<p>Please keep an eye on this website for information about the API. Important information will also be included along with any data retrieved from the API.</p>
-
-<h3>
-<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><code>http://api.auroras.live/v1/?type=ace&amp;data=bz</code></p>
-
-<div class="highlight highlight-source-json"><pre>{
-  <span class="pl-s"><span class="pl-pds">"</span>date<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-03-31T02:53:16+11:00<span class="pl-pds">"</span></span>,
-  <span class="pl-s"><span class="pl-pds">"</span>message<span class="pl-pds">"</span></span>: [
-    <span class="pl-s"><span class="pl-pds">"</span>Version 0 of the API is being deprecated. Please migrate to v1. Version 0 will be unpublished on January 1st 2017<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>There will be an outage on the 8th of July 2016 between 00:00 and 01:00 UTC while services are moved to a new host<span class="pl-pds">"</span></span>
+```json
+{
+  "date": "2016-03-31T02:53:16+11:00",
+  "message": [
+    "Version 0 of the API is being deprecated. Please migrate to v1. Version 0 will be unpublished on January 1st 2017",
+    "There will be an outage on the 8th of July 2016 between 00:00 and 01:00 UTC while services are moved to a new host"
   ],
-  <span class="pl-s"><span class="pl-pds">"</span>bz<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1.7<span class="pl-pds">"</span></span>,
-  <span class="pl-s"><span class="pl-pds">"</span>colour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>yellow<span class="pl-pds">"</span></span>
-}</pre></div>
-
-<h3>
-<a id="returns" class="anchor" href="#returns" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Returns</h3>
-
-<p>Array. The requested data will return, <strong>if present</strong>, important messages in the form of an array.</p>
-
-<hr>
-
-<h2>
-<a id="dates" class="anchor" href="#dates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dates</h2>
-
-<p>All data returned will include a <code>date</code> property, offset by whatever timezone you pass to it (see the section on Timezones below)</p>
-
-<hr>
-
-<h2>
-<a id="timezones" class="anchor" href="#timezones" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Timezones</h2>
-
-<p>By default, all dates and times returned are in UTC. By appending <code>tz</code> to your request and passing an offset, in minutes, you can convert most of these times and dates into your local timezone. If you're accessing the API via Javascript (e.g. an AngularJS app), you can simply use <code>new Date().getTimezoneOffset()</code> to obtain the offset.</p>
-
-<h3>
-<a id="example-1" class="anchor" href="#example-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><code>http://api.auroras.live/v1/?type=ace&amp;data=bz&amp;tz=-660</code></p>
-
-<div class="highlight highlight-source-json"><pre>{
-  <span class="pl-s"><span class="pl-pds">"</span>date<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-03-31T02:53:16+11:00<span class="pl-pds">"</span></span>,
-  <span class="pl-s"><span class="pl-pds">"</span>bz<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1.7<span class="pl-pds">"</span></span>,
-  <span class="pl-s"><span class="pl-pds">"</span>colour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>yellow<span class="pl-pds">"</span></span>
-}</pre></div>
-
-<h3>
-<a id="returns-1" class="anchor" href="#returns-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Returns</h3>
-
-<p>Date. The timestamp will be offset based on <code>tz</code></p>
-
-<hr>
-
-<h2>
-<a id="formatting-beta" class="anchor" href="#formatting-beta" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Formatting (BETA)</h2>
-
-<p>By default, data will be returned as JSON. If you wish to return the data as XML, simply append <code>format=xml</code> to your request. Note that this won't work on all modules, especially the <code>threeday</code> portion of the <code>ace</code> module, as the generated fields contain illegal keys</p>
-
-<h3>
-<a id="example-2" class="anchor" href="#example-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><code>http://api.auroras.live/v1/?type=ace&amp;data=bz&amp;format=xml</code></p>
-
-<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">data</span>&gt;
-  &lt;<span class="pl-ent">date</span>&gt;2016-04-19T13:23:36+00:00&lt;/<span class="pl-ent">date</span>&gt;
-  &lt;<span class="pl-ent">bz</span>&gt;2.2&lt;/<span class="pl-ent">bz</span>&gt;
-  &lt;<span class="pl-ent">colour</span>&gt;green&lt;/<span class="pl-ent">colour</span>&gt;
-&lt;/<span class="pl-ent">data</span>&gt;</pre></div>
-
-<h3>
-<a id="returns-2" class="anchor" href="#returns-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Returns</h3>
-
-<p>The data as XML.</p>
-
-<hr>
-
-<h2>
-<a id="colouring" class="anchor" href="#colouring" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Colouring</h2>
-
-<p>Many modules will return a colour along with the information. This allows users to know what the returned values actually mean (e.g. green = no activity, red = lots of activity). It's also designed to allow programmers to set colours without having to code in lenghthy <code>switch</code> statements.</p>
-
-<p>If you wish to change the format of the colours, simply append <code>colour=</code> to your request along with <code>hex</code> or <code>rgb</code> to return the colours in that format. <strong>Please take note of spelling, as the API uses British English, so <em>colour</em> as opposed to <em>color</em></strong></p>
-
-<h3>
-<a id="example-3" class="anchor" href="#example-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><code>http://api.auroras.live/v1/?type=ace&amp;data=bz&amp;colour=hex</code></p>
-
-<div class="highlight highlight-source-json"><pre>{
-  <span class="pl-s"><span class="pl-pds">"</span>date<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-19T13:29:23+00:00<span class="pl-pds">"</span></span>,
-  <span class="pl-s"><span class="pl-pds">"</span>bz<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1.3<span class="pl-pds">"</span></span>,
-  <span class="pl-s"><span class="pl-pds">"</span>colour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>#00FF00<span class="pl-pds">"</span></span>
-}</pre></div>
-
-<h3>
-<a id="returns-3" class="anchor" href="#returns-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Returns</h3>
-
-<p>The colour in the specified format</p>
-
-<p>Below is a table showing how the colours are determined:</p>
-
-<table>
-<thead>
-<tr>
-<th>Data</th>
-<th>Value 1</th>
-<th>Value 2</th>
-<th>Colour Name</th>
-<th>Hex Colour</th>
-<th>CSS RGB Colour</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Bz</td>
-<td>&lt;= -15</td>
-<td></td>
-<td><code>red</code></td>
-<td><code>#FF0000</code></td>
-<td><code>rgb(255,0,0)</code></td>
-</tr>
-<tr>
-<td>Bz</td>
-<td>&gt; -15</td>
-<td>&lt;= -10</td>
-<td><code>orange</code></td>
-<td><code>#FF8000</code></td>
-<td><code>rgb(255,128,0)</code></td>
-</tr>
-<tr>
-<td>Bz</td>
-<td>&gt; -10</td>
-<td>&lt; 0</td>
-<td><code>yellow</code></td>
-<td><code>#FFFF00</code></td>
-<td><code>rgb(255,255,0)</code></td>
-</tr>
-<tr>
-<td>Bz</td>
-<td>&gt;= 0</td>
-<td></td>
-<td><code>green</code></td>
-<td><code>#00FF00</code></td>
-<td><code>rgb(0,255,0)</code></td>
-</tr>
-<tr>
-<td>Speed</td>
-<td>&gt;= 700</td>
-<td></td>
-<td><code>red</code></td>
-<td><code>#FF0000</code></td>
-<td><code>rgb(255,0,0)</code></td>
-</tr>
-<tr>
-<td>Speed</td>
-<td>&gt;= 500</td>
-<td>&lt; 700</td>
-<td><code>orange</code></td>
-<td><code>#FF8000</code></td>
-<td><code>rgb(255,128,0)</code></td>
-</tr>
-<tr>
-<td>Speed</td>
-<td>&gt;= 350</td>
-<td>&lt; 500</td>
-<td><code>yellow</code></td>
-<td><code>#FFFF00</code></td>
-<td><code>rgb(255,255,0)</code></td>
-</tr>
-<tr>
-<td>Speed</td>
-<td>&lt; 350</td>
-<td></td>
-<td><code>green</code></td>
-<td><code>#00FF00</code></td>
-<td><code>rgb(0,255,0)</code></td>
-</tr>
-<tr>
-<td>Density</td>
-<td>&gt;= 15</td>
-<td></td>
-<td><code>red</code></td>
-<td><code>#FF0000</code></td>
-<td><code>rgb(255,0,0)</code></td>
-</tr>
-<tr>
-<td>Density</td>
-<td>&gt;= 10</td>
-<td>&lt; 15</td>
-<td><code>orange</code></td>
-<td><code>#FF8000</code></td>
-<td><code>rgb(255,128,0)</code></td>
-</tr>
-<tr>
-<td>Density</td>
-<td>&gt;= 4</td>
-<td>&lt; 10</td>
-<td><code>yellow</code></td>
-<td><code>#FFFF00</code></td>
-<td><code>rgb(255,255,0)</code></td>
-</tr>
-<tr>
-<td>Density</td>
-<td>&gt; 0</td>
-<td>&lt; 4</td>
-<td><code>green</code></td>
-<td><code>#00FF00</code></td>
-<td><code>rgb(0,255,0)</code></td>
-</tr>
-<tr>
-<td>Kp</td>
-<td>&gt; 6</td>
-<td></td>
-<td><code>red</code></td>
-<td><code>#FF0000</code></td>
-<td><code>rgb(255,0,0)</code></td>
-</tr>
-<tr>
-<td>Kp</td>
-<td>&gt;= 5</td>
-<td>&lt; 6</td>
-<td><code>orange</code></td>
-<td><code>#FF8000</code></td>
-<td><code>rgb(255,128,0)</code></td>
-</tr>
-<tr>
-<td>Kp</td>
-<td>&gt;= 3</td>
-<td>&lt;= 4</td>
-<td><code>yellow</code></td>
-<td><code>#FFFF00</code></td>
-<td><code>rgb(255,255,0)</code></td>
-</tr>
-<tr>
-<td>Kp</td>
-<td>&lt; 3</td>
-<td></td>
-<td><code>green</code></td>
-<td><code>#00FF00</code></td>
-<td><code>rgb(0,255,0)</code></td>
-</tr>
-<tr>
-<td>Nowcast</td>
-<td>&gt;= 75</td>
-<td>&lt;= 100</td>
-<td><code>red</code></td>
-<td><code>#FF0000</code></td>
-<td><code>rgb(255,0,0)</code></td>
-</tr>
-<tr>
-<td>Nowcast</td>
-<td>&gt;= 50</td>
-<td>&lt; 75</td>
-<td><code>orange</code></td>
-<td><code>#FF8000</code></td>
-<td><code>rgb(255,128,0)</code></td>
-</tr>
-<tr>
-<td>Nowcast</td>
-<td>&gt;= 25</td>
-<td>&lt; 50</td>
-<td><code>yellow</code></td>
-<td><code>#FFFF00</code></td>
-<td><code>rgb(255,255,0)</code></td>
-</tr>
-<tr>
-<td>Nowcast</td>
-<td>&gt;= 0</td>
-<td>&lt; 25</td>
-<td><code>green</code></td>
-<td><code>#00FF00</code></td>
-<td><code>rgb(0,255,0)</code></td>
-</tr>
-</tbody>
-</table>
-
-<h1>
-<a id="modules" class="anchor" href="#modules" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Modules</h1>
-
-<p>The API consists of a few modules that you can access.</p>
-
-<hr>
-
-<h2>
-<a id="all" class="anchor" href="#all" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>All</h2>
-
-<p>The "all" module combines a variety of information that a typical site would use. This saves on multiple API calls. Information return by default includes:</p>
-
-<ul>
-<li>ACE data (speed, density, Bz, Kp, 1 hour Kp forecast, 4 hour Kp forecast)</li>
-<li>Three day Kp forecast</li>
-<li>Weather for the specified location</li>
-<li>9 day weather forecast</li>
-<li>Probability data, which includes
-
-<ul>
-<li>The probability of seeing an aurora directly overhead</li>
-<li>The highest probability of seeing an aurora within 9 degrees (approx. 1000km) of your location</li>
-<li>The location on earth that has the best probability of seeing an aurora overhead</li>
-</ul>
-</li>
-</ul>
-
-<p>Using the optional parameters below, you can omit data, which is useful for areas with unreliable internet connections.</p>
-
-<h3>
-<a id="usage-1" class="anchor" href="#usage-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h3>
-
-<p><code>http://api.auroras.live/v1/?type=all&amp;lat=51.5216762&amp;long=-0.3081689</code></p>
-
-<h3>
-<a id="returns-4" class="anchor" href="#returns-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Returns</h3>
-
-<p>To see what data is returned, see the examples in the <code>ace</code> and <code>weather</code> modules</p>
-
-<h3>
-<a id="required-parameters" class="anchor" href="#required-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Required Parameters</h3>
-
-<h4>
-<a id="lat" class="anchor" href="#lat" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>lat</h4>
-
-<p>Integer. The latitude of the area you wish to obtain information for. Valid ranges are from <code>-90</code> to <code>90</code></p>
-
-<h4>
-<a id="long" class="anchor" href="#long" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>long</h4>
-
-<p>Integer. The longitude of the area you wish to obtain information for. Valid ranges are from <code>-180</code> to <code>180</code></p>
-
-<h3>
-<a id="optional-parameters" class="anchor" href="#optional-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Optional parameters</h3>
-
-<h4>
-<a id="ace" class="anchor" href="#ace" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ace</h4>
-
-<p>Boolean. Defaults to <code>true</code>. If <code>false</code>, omits the ACE data from the results</p>
-
-<h4>
-<a id="weather" class="anchor" href="#weather" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>weather</h4>
-
-<p>Boolean. Defaults to <code>true</code>. If <code>false</code>, omits the weather (and 9 day forecast) from the results</p>
-
-<h4>
-<a id="forecast" class="anchor" href="#forecast" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>forecast</h4>
-
-<p>Boolean. Defaults to <code>true</code>. If <code>false</code>, omits the 9 day weather forecast. If <code>weather</code> is false, this parameter has no effect</p>
-
-<h4>
-<a id="threeday" class="anchor" href="#threeday" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>threeday</h4>
-
-<p>Boolean. Defaults to <code>true</code>. If <code>false</code>, omits the three day Kp forecast from the results.</p>
-
-<h4>
-<a id="images" class="anchor" href="#images" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>images</h4>
-
-<p>Boolean. Defaults to <code>false</code>. If <code>true</code>, includes a list of possible webcam, chart and satellite images, along with category data.</p>
-
-<h4>
-<a id="probability" class="anchor" href="#probability" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>probability</h4>
-
-<p>Boolean. Defaults to <code>true</code>. If <code>false</code>, omits the SWPC "nowcast" probability data</p>
-
-<hr>
-
-<h2>
-<a id="ace-1" class="anchor" href="#ace-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ACE</h2>
-
-<p>The ACE module returns information obtained from the ACE spacecraft, plus the "nowcast" probability data. Future versions of this API will separate nowcast into a separate set of data</p>
-
-<h3>
-<a id="usage-2" class="anchor" href="#usage-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h3>
-
-<p><code>http://api.auroras.live/v1/?type=ace&amp;data=all</code></p>
-
-<div class="highlight highlight-source-json"><pre>{
-    <span class="pl-s"><span class="pl-pds">"</span>date<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-19T14:01:46+00:00<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>bz<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>4.2<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>density<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>4.4<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>speed<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>377.1<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>kp1hour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.67<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>kp4hour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.00<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>kp<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.33<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>colour<span class="pl-pds">"</span></span>: {
-        <span class="pl-s"><span class="pl-pds">"</span>bz<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>green<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>density<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>yellow<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>speed<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>green<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>kp1hour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>green<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>kp4hour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>green<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>kp<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>green<span class="pl-pds">"</span></span>
+  "bz": "1.7",
+  "colour": "yellow"
+}
+```
+
+### Returns
+Array. The requested data will return, **if present**, important messages in the form of an array.
+
+-----------------------------------------------------
+## Dates
+All data returned will include a `date` property, offset by whatever timezone you pass to it (see the section on Timezones below)
+
+-----------------------------------------------------
+## Timezones
+By default, all dates and times returned are in UTC. By appending `tz` to your request and passing an offset, in minutes, you can convert most of these times and dates into your local timezone. If you're accessing the API via Javascript (e.g. an AngularJS app), you can simply use `new Date().getTimezoneOffset()` to obtain the offset.
+
+### Example
+`http://api.auroras.live/v1/?type=ace&data=bz&tz=-660`
+```json
+{
+  "date": "2016-03-31T02:53:16+11:00",
+  "bz": "1.7",
+  "colour": "yellow"
+}
+```
+### Returns
+Date. The timestamp will be offset based on `tz`
+
+-----------------------------------------------------
+## Formatting (BETA)
+By default, data will be returned as JSON. If you wish to return the data as XML, simply append `format=xml` to your request. Note that this won't work on all modules, especially the `threeday` portion of the `ace` module, as the generated fields contain illegal keys
+
+### Example
+`http://api.auroras.live/v1/?type=ace&data=bz&format=xml`
+
+```xml
+<data>
+  <date>2016-04-19T13:23:36+00:00</date>
+  <bz>2.2</bz>
+  <colour>green</colour>
+</data>
+```
+### Returns
+The data as XML.
+
+-----------------------------------------------------
+## Colouring
+Many modules will return a colour along with the information. This allows users to know what the returned values actually mean (e.g. green = no activity, red = lots of activity). It's also designed to allow programmers to set colours without having to code in lenghthy `switch` statements.
+
+If you wish to change the format of the colours, simply append `colour=` to your request along with `hex` or `rgb` to return the colours in that format. **Please take note of spelling, as the API uses British English, so _colour_ as opposed to _color_**
+
+### Example
+`http://api.auroras.live/v1/?type=ace&data=bz&colour=hex`
+```json
+{
+  "date": "2016-04-19T13:29:23+00:00",
+  "bz": "1.3",
+  "colour": "#00FF00"
+}
+```
+
+### Returns
+The colour in the specified format
+
+Below is a table showing how the colours are determined:
+
+| Data    | Value 1 | Value 2 | Colour Name | Hex Colour | CSS RGB Colour   |
+|---------|---------|---------|-------------|------------|------------------|
+| Bz      | <= -15  |         | `red`       | `#FF0000`  | `rgb(255,0,0)`   |
+| Bz      | > -15   | <= -10  | `orange`    | `#FF8000`  | `rgb(255,128,0)` |
+| Bz      | > -10   | < 0     | `yellow`    | `#FFFF00`  | `rgb(255,255,0)` |
+| Bz      | >= 0    |         | `green`     | `#00FF00`  | `rgb(0,255,0)`   |
+| Speed   | >= 700  |         | `red`       | `#FF0000`  | `rgb(255,0,0)`   |
+| Speed   | >= 500  | < 700   | `orange`    | `#FF8000`  | `rgb(255,128,0)` |
+| Speed   | >= 350  | < 500   | `yellow`    | `#FFFF00`  | `rgb(255,255,0)` |
+| Speed   | < 350   |         | `green`     | `#00FF00`  | `rgb(0,255,0)`   |
+| Density | >= 15   |         | `red`       | `#FF0000`  | `rgb(255,0,0)`   |
+| Density | >= 10   | < 15    | `orange`    | `#FF8000`  | `rgb(255,128,0)` |
+| Density | >= 4    | < 10    | `yellow`    | `#FFFF00`  | `rgb(255,255,0)` |
+| Density | > 0     | < 4     | `green`     | `#00FF00`  | `rgb(0,255,0)`   |
+| Kp      | > 6     |         | `red`       | `#FF0000`  | `rgb(255,0,0)`   |
+| Kp      | >= 5    | < 6     | `orange`    | `#FF8000`  | `rgb(255,128,0)` |
+| Kp      | >= 3    | <= 4    | `yellow`    | `#FFFF00`  | `rgb(255,255,0)` |
+| Kp      | < 3     |         | `green`     | `#00FF00`  | `rgb(0,255,0)`   |
+| Nowcast | >= 75   | <= 100  | `red`       | `#FF0000`  | `rgb(255,0,0)`   |
+| Nowcast | >= 50   | < 75    | `orange`    | `#FF8000`  | `rgb(255,128,0)` |
+| Nowcast | >= 25   | < 50    | `yellow`    | `#FFFF00`  | `rgb(255,255,0)` |
+| Nowcast | >= 0    | < 25    | `green`     | `#00FF00`  | `rgb(0,255,0)`   |
+
+# Modules
+The API consists of a few modules that you can access.
+
+-----------------------------------------------------
+## All
+The "all" module combines a variety of information that a typical site would use. This saves on multiple API calls. Information return by default includes:
+
+ - ACE data (speed, density, Bz, Kp, 1 hour Kp forecast, 4 hour Kp forecast)
+ - Three day Kp forecast
+ - Weather for the specified location
+ - 9 day weather forecast
+ - Probability data, which includes
+   - The probability of seeing an aurora directly overhead
+   - The highest probability of seeing an aurora within 9 degrees (approx. 1000km) of your location
+   - The location on earth that has the best probability of seeing an aurora overhead
+
+Using the optional parameters below, you can omit data, which is useful for areas with unreliable internet connections.
+
+### Usage
+`http://api.auroras.live/v1/?type=all&lat=51.5216762&long=-0.3081689`
+
+### Returns
+To see what data is returned, see the examples in the `ace` and `weather` modules
+
+### Required Parameters
+
+#### lat
+Integer. The latitude of the area you wish to obtain information for. Valid ranges are from `-90` to `90`
+
+#### long
+Integer. The longitude of the area you wish to obtain information for. Valid ranges are from `-180` to `180`
+
+### Optional parameters
+
+#### ace
+Boolean. Defaults to `true`. If `false`, omits the ACE data from the results
+
+#### weather
+Boolean. Defaults to `true`. If `false`, omits the weather (and 9 day forecast) from the results
+
+#### forecast
+Boolean. Defaults to `true`. If `false`, omits the 9 day weather forecast. If `weather` is false, this parameter has no effect
+
+#### threeday
+Boolean. Defaults to `true`. If `false`, omits the three day Kp forecast from the results.
+
+#### images
+Boolean. Defaults to `false`. If `true`, includes a list of possible webcam, chart and satellite images, along with category data.
+
+#### probability
+Boolean. Defaults to `true`. If `false`, omits the SWPC "nowcast" probability data
+
+-----------------------------------------------------
+## ACE
+The ACE module returns information obtained from the ACE spacecraft, plus the "nowcast" probability data. Future versions of this API will separate nowcast into a separate set of data
+
+### Usage
+`http://api.auroras.live/v1/?type=ace&data=all`
+```json
+{
+    "date": "2016-04-19T14:01:46+00:00",
+    "bz": "4.2",
+    "density": "4.4",
+    "speed": "377.1",
+    "kp1hour": "0.67",
+    "kp4hour": "0.00",
+    "kp": "0.33",
+    "colour": {
+        "bz": "green",
+        "density": "yellow",
+        "speed": "green",
+        "kp1hour": "green",
+        "kp4hour": "green",
+        "kp": "green"
     }
-}</pre></div>
+}
+```
 
-<h3>
-<a id="returns-5" class="anchor" href="#returns-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Returns</h3>
+### Returns
+A JSON string that contains the date, Bz, density, speed, Kp data, as well as colour information relating to the current space weather
 
-<p>A JSON string that contains the date, Bz, density, speed, Kp data, as well as colour information relating to the current space weather</p>
+### Required Parameters
 
-<h3>
-<a id="required-parameters-1" class="anchor" href="#required-parameters-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Required Parameters</h3>
+#### data
+String. The type of data that you wish to retrieve. Valid values include:
 
-<h4>
-<a id="data" class="anchor" href="#data" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>data</h4>
+  - `bz` - Returns the Bz value. Bz is the direction of the Interplanetary Magnetic Field (IMF)
+  - `speed` - Returns the bulk speed
+  - `density` - Returns the proton density
+  - `kp` - Returns the current, 1 hour and 4 hour Kp forecasts
+  - `threeday` - Returns the three day Kp forecast
+  - `probability` - Returns the probability of seeing an aurora overhead, within 1000km (i.e. on the horizon) and the place on earth with the best possible chance. Data derived from the SWPC's Nowcast
+  - `all` - Everything above, except for the probability
 
-<p>String. The type of data that you wish to retrieve. Valid values include:</p>
+### Optional Parameters
 
-<ul>
-<li>
-<code>bz</code> - Returns the Bz value. Bz is the direction of the Interplanetary Magnetic Field (IMF)</li>
-<li>
-<code>speed</code> - Returns the bulk speed</li>
-<li>
-<code>density</code> - Returns the proton density</li>
-<li>
-<code>kp</code> - Returns the current, 1 hour and 4 hour Kp forecasts</li>
-<li>
-<code>threeday</code> - Returns the three day Kp forecast</li>
-<li>
-<code>probability</code> - Returns the probability of seeing an aurora overhead, within 1000km (i.e. on the horizon) and the place on earth with the best possible chance. Data derived from the SWPC's Nowcast</li>
-<li>
-<code>all</code> - Everything above, except for the probability</li>
-</ul>
+#### lat
+Integer. The latitude of the location you wish to retrieve probability info for. Valid ranges are from `-90` to `90`. **Only necessary if requesting probability data**
 
-<h3>
-<a id="optional-parameters-1" class="anchor" href="#optional-parameters-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Optional Parameters</h3>
+#### long
+Integer. The longitude of the location you wish to retrieve probability info for. Valid ranges are from `-180` to `180`. **Only necessary if requesting probability data**
 
-<h4>
-<a id="lat-1" class="anchor" href="#lat-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>lat</h4>
+-----------------------------------------------------
+## Embed
+The embed module returns an image containing various ACE data, allowing the information to be embedded in a forum signature, website etc. You have the option of using current data, or passing in custom values (to show data for a moment in time, for example)
 
-<p>Integer. The latitude of the location you wish to retrieve probability info for. Valid ranges are from <code>-90</code> to <code>90</code>. <strong>Only necessary if requesting probability data</strong></p>
+### Usage
+`http://api.auroras.live/v1/?type=embed&size=normal`
+![Current ACE data](http://beta.api.auroras.live/v1/?type=embed&size=normal)
 
-<h4>
-<a id="long-1" class="anchor" href="#long-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>long</h4>
+### Returns
+A PNG file containing the current data in a ready-to-embed format
 
-<p>Integer. The longitude of the location you wish to retrieve probability info for. Valid ranges are from <code>-180</code> to <code>180</code>. <strong>Only necessary if requesting probability data</strong></p>
+### Required Parameters
+There are no required parameters
 
-<hr>
+### Optional Parameters
 
-<h2>
-<a id="embed" class="anchor" href="#embed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Embed</h2>
+#### size
+String. Defaults to "regular" (actually defaults to "none" internally, for analytics purposes). Used to show one of three possible sizes:
 
-<p>The embed module returns an image containing various ACE data, allowing the information to be embedded in a forum signature, website etc. You have the option of using current data, or passing in custom values (to show data for a moment in time, for example)</p>
+ - `regular` (450x250)
+ - `small` (338x188)
+ - `xsmall` (254x141)
 
-<h3>
-<a id="usage-3" class="anchor" href="#usage-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h3>
+#### bz
+Integer. The Bz value to show. **If this parameter is passed, then you MUST pass all other optional parameters below!**
 
-<p><code>http://api.auroras.live/v1/?type=embed&amp;size=normal</code>
-<img src="http://beta.api.auroras.live/v1/?type=embed&amp;size=normal" alt="Current ACE data"></p>
+#### speed
+Integer. The speed to show. **Required if the `bz` parameter is passed**
 
-<h3>
-<a id="returns-6" class="anchor" href="#returns-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Returns</h3>
+#### density
+Integer. The density to show. **Required if the `bz` parameter is passed**
 
-<p>A PNG file containing the current data in a ready-to-embed format</p>
+#### kp
+Integer. The Kp to show. **Required if the `bz` parameter is passed**
 
-<h3>
-<a id="required-parameters-2" class="anchor" href="#required-parameters-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Required Parameters</h3>
+### kp1hour
+Integer. The 1 hour Kp forecast to show. **Required if the `bz` parameter is passed**
 
-<p>There are no required parameters</p>
+#### date
+String. The date to show at the top of the image. **MUST be a valid PHP date (e.g. "now", "midnight yesterday", "2013-01-01 00:00")**. **Required if the `bz` parameter is passed**
 
-<h3>
-<a id="optional-parameters-2" class="anchor" href="#optional-parameters-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Optional Parameters</h3>
+-----------------------------------------------------
+## Archive
+The Archive module lets you search through previous years' data. Due to the amount of data stored, you can only search for three days worth of data in a single call.
 
-<h4>
-<a id="size" class="anchor" href="#size" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>size</h4>
+### Usage
 
-<p>String. Defaults to "regular" (actually defaults to "none" internally, for analytics purposes). Used to show one of three possible sizes:</p>
+#### Example 1
+Obtaining statistics about the archive
+`http://api.auroras.live/v1/?type=archive&action=stats`
 
-<ul>
-<li>
-<code>regular</code> (450x250)</li>
-<li>
-<code>small</code> (338x188)</li>
-<li>
-<code>xsmall</code> (254x141)</li>
-</ul>
+```json
+{
+    "start": "2000-08-01T00:00:00+00:00",
+    "end": "2016-04-20T03:07:00+00:00",
+    "kpstart": "2016-01-06T12:00:00+00:00",
+    "kpend": "2016-04-20T03:00:00+00:00",
+    "size": "1294.14"
+}
+```
+(NB: Size is in megabytes)
 
-<h4>
-<a id="bz" class="anchor" href="#bz" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>bz</h4>
+#### Example 2
+Obtaining archive data for the February 1st 2016, between midnight and 1am
+`http://api.auroras.live/v1/?type=archive&action=search&start=2016-02-01T00:00&end=2016-02-01T01:00`
 
-<p>Integer. The Bz value to show. <strong>If this parameter is passed, then you MUST pass all other optional parameters below!</strong></p>
+_This example is truncated, as the data continues on until `end` has been reached_
 
-<h4>
-<a id="speed" class="anchor" href="#speed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>speed</h4>
-
-<p>Integer. The speed to show. <strong>Required if the <code>bz</code> parameter is passed</strong></p>
-
-<h4>
-<a id="density" class="anchor" href="#density" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>density</h4>
-
-<p>Integer. The density to show. <strong>Required if the <code>bz</code> parameter is passed</strong></p>
-
-<h4>
-<a id="kp" class="anchor" href="#kp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>kp</h4>
-
-<p>Integer. The Kp to show. <strong>Required if the <code>bz</code> parameter is passed</strong></p>
-
-<h3>
-<a id="kp1hour" class="anchor" href="#kp1hour" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>kp1hour</h3>
-
-<p>Integer. The 1 hour Kp forecast to show. <strong>Required if the <code>bz</code> parameter is passed</strong></p>
-
-<h4>
-<a id="date" class="anchor" href="#date" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>date</h4>
-
-<p>String. The date to show at the top of the image. <strong>MUST be a valid PHP date (e.g. "now", "midnight yesterday", "2013-01-01 00:00")</strong>. <strong>Required if the <code>bz</code> parameter is passed</strong></p>
-
-<hr>
-
-<h2>
-<a id="archive" class="anchor" href="#archive" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Archive</h2>
-
-<p>The Archive module lets you search through previous years' data. Due to the amount of data stored, you can only search for three days worth of data in a single call.</p>
-
-<h3>
-<a id="usage-4" class="anchor" href="#usage-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h3>
-
-<h4>
-<a id="example-1" class="anchor" href="#example-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example 1</h4>
-
-<p>Obtaining statistics about the archive
-<code>http://api.auroras.live/v1/?type=archive&amp;action=stats</code></p>
-
-<div class="highlight highlight-source-json"><pre>{
-    <span class="pl-s"><span class="pl-pds">"</span>start<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2000-08-01T00:00:00+00:00<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>end<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-20T03:07:00+00:00<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>kpstart<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-01-06T12:00:00+00:00<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>kpend<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-20T03:00:00+00:00<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>size<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1294.14<span class="pl-pds">"</span></span>
-}</pre></div>
-
-<p>(NB: Size is in megabytes)</p>
-
-<h4>
-<a id="example-2" class="anchor" href="#example-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example 2</h4>
-
-<p>Obtaining archive data for the February 1st 2016, between midnight and 1am
-<code>http://api.auroras.live/v1/?type=archive&amp;action=search&amp;start=2016-02-01T00:00&amp;end=2016-02-01T01:00</code></p>
-
-<p><em>This example is truncated, as the data continues on until <code>end</code> has been reached</em></p>
-
-<div class="highlight highlight-source-json"><pre>{
-    <span class="pl-s"><span class="pl-pds">"</span>2016-02-01 00:00:00<span class="pl-pds">"</span></span>: {
-        <span class="pl-s"><span class="pl-pds">"</span>Date<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-02-01 00:00:00<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>JulianDay<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>57419<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>SecondsDay<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Status<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Bx<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>4.2<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>By<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>4.8<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Bz<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>-5.8<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Bt<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>8.7<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Lat<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>-42.1<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Long<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>48.9<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>ProtonDensity<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>4.4<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>BulkSpeed<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>303.1<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>IonTemperature<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>3.33e+04<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Date1Hour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-02-01 01:00:00<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Kp1Hour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1.67<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Date4Hour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-02-01 04:00:00<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Kp4Hour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1.67<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Kp<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1.67<span class="pl-pds">"</span></span>
+```json
+{
+    "2016-02-01 00:00:00": {
+        "Date": "2016-02-01 00:00:00",
+        "JulianDay": "57419",
+        "SecondsDay": "0",
+        "Status": "0",
+        "Bx": "4.2",
+        "By": "4.8",
+        "Bz": "-5.8",
+        "Bt": "8.7",
+        "Lat": "-42.1",
+        "Long": "48.9",
+        "ProtonDensity": "4.4",
+        "BulkSpeed": "303.1",
+        "IonTemperature": "3.33e+04",
+        "Date1Hour": "2016-02-01 01:00:00",
+        "Kp1Hour": "1.67",
+        "Date4Hour": "2016-02-01 04:00:00",
+        "Kp4Hour": "1.67",
+        "Kp": "1.67"
     },
-    <span class="pl-s"><span class="pl-pds">"</span>2016-02-01 00:01:00<span class="pl-pds">"</span></span>: {
-        <span class="pl-s"><span class="pl-pds">"</span>Date<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-02-01 00:01:00<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>JulianDay<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>57419<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>SecondsDay<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>60<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Status<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Bx<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>4.4<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>By<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>4.6<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Bz<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>-5.9<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Bt<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>8.7<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Lat<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>-42.7<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Long<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>45.9<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>ProtonDensity<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>4.2<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>BulkSpeed<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>303.0<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>IonTemperature<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>3.59e+04<span class="pl-pds">"</span></span>
+    "2016-02-01 00:01:00": {
+        "Date": "2016-02-01 00:01:00",
+        "JulianDay": "57419",
+        "SecondsDay": "60",
+        "Status": "0",
+        "Bx": "4.4",
+        "By": "4.6",
+        "Bz": "-5.9",
+        "Bt": "8.7",
+        "Lat": "-42.7",
+        "Long": "45.9",
+        "ProtonDensity": "4.2",
+        "BulkSpeed": "303.0",
+        "IonTemperature": "3.59e+04"
     },
 
-    <span class="pl-ii">[...]</span></pre></div>
+    [...]
+```
 
-<h3>
-<a id="required-parameters-3" class="anchor" href="#required-parameters-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Required Parameters</h3>
+### Required Parameters
 
-<h4>
-<a id="action" class="anchor" href="#action" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>action</h4>
+#### action
+String. The type of action to take. Valid values are:
 
-<p>String. The type of action to take. Valid values are:</p>
+ - `stats` - Returns statistics about the archive, including start and end dates and the size of the databases in megabytes
+ - `search` - Returns archived data, given a start and end date
 
-<ul>
-<li>
-<code>stats</code> - Returns statistics about the archive, including start and end dates and the size of the databases in megabytes</li>
-<li>
-<code>search</code> - Returns archived data, given a start and end date</li>
-</ul>
+#### start
+String. The date to begin retrieving data from. **Only required if action = `search` and MUST be a valid PHP date**
 
-<h4>
-<a id="start" class="anchor" href="#start" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>start</h4>
+#### end
+String. The end date for retrieving data. **Only required if action = `search` and MUST be a valid PHP date**
 
-<p>String. The date to begin retrieving data from. <strong>Only required if action = <code>search</code> and MUST be a valid PHP date</strong></p>
+### Notes
+When `tz` is set, your start and end dates are converted to UTC, and the results are returned as UTC. This means you can search for an event at 1am local time, and it'll convert that to UTC and retrieve results. It's up to you to convert to your local timezone again. This behaviour may change in the future.
 
-<h4>
-<a id="end" class="anchor" href="#end" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>end</h4>
-
-<p>String. The end date for retrieving data. <strong>Only required if action = <code>search</code> and MUST be a valid PHP date</strong></p>
-
-<h3>
-<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Notes</h3>
-
-<p>When <code>tz</code> is set, your start and end dates are converted to UTC, and the results are returned as UTC. This means you can search for an event at 1am local time, and it'll convert that to UTC and retrieve results. It's up to you to convert to your local timezone again. This behaviour may change in the future.</p>
-
-<p><code>http://api.auroras.live/v1/?type=archive&amp;action=search&amp;start=1am&amp;end=1am</code></p>
-
-<div class="highlight highlight-source-json"><pre>{
-    <span class="pl-s"><span class="pl-pds">"</span>2016-04-20 01:00:00<span class="pl-pds">"</span></span>: {
-        <span class="pl-s"><span class="pl-pds">"</span>Date<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-20 01:00:00<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>JulianDay<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>57498<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>SecondsDay<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>3600<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Status<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Bx<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>-0.7<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>By<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>6.3<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Bz<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.4<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Bt<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>6.4<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Lat<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>3.5<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Long<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>95.9<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>ProtonDensity<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>6.9<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>BulkSpeed<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>352.7<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>IonTemperature<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>3.09e+04<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Date1Hour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-20 02:00:00<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Kp1Hour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.33<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Date4Hour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-20 05:00:00<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Kp4Hour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.00<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Kp<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1.00<span class="pl-pds">"</span></span>
+`http://api.auroras.live/v1/?type=archive&action=search&start=1am&end=1am`
+```json
+{
+    "2016-04-20 01:00:00": {
+        "Date": "2016-04-20 01:00:00",
+        "JulianDay": "57498",
+        "SecondsDay": "3600",
+        "Status": "0",
+        "Bx": "-0.7",
+        "By": "6.3",
+        "Bz": "0.4",
+        "Bt": "6.4",
+        "Lat": "3.5",
+        "Long": "95.9",
+        "ProtonDensity": "6.9",
+        "BulkSpeed": "352.7",
+        "IonTemperature": "3.09e+04",
+        "Date1Hour": "2016-04-20 02:00:00",
+        "Kp1Hour": "0.33",
+        "Date4Hour": "2016-04-20 05:00:00",
+        "Kp4Hour": "0.00",
+        "Kp": "1.00"
     }
-}</pre></div>
+}
+```
 
-<p><code>http://api.auroras.live/v1/?type=archive&amp;action=search&amp;start=1am&amp;end=1am&amp;tz=-660</code></p>
-
-<div class="highlight highlight-source-json"><pre>{
-    <span class="pl-s"><span class="pl-pds">"</span>2016-04-19 14:00:00<span class="pl-pds">"</span></span>: {
-        <span class="pl-s"><span class="pl-pds">"</span>Date<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-19 14:00:00<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>JulianDay<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>57498<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>SecondsDay<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>3600<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Status<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Bx<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>-0.7<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>By<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>6.3<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Bz<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.4<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Bt<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>6.4<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Lat<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>3.5<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Long<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>95.9<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>ProtonDensity<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>6.9<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>BulkSpeed<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>352.7<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>IonTemperature<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>3.09e+04<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Date1Hour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-20 13:00:00<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Kp1Hour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.33<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Date4Hour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-20 16:00:00<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Kp4Hour<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.00<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>Kp<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1.00<span class="pl-pds">"</span></span>
+`http://api.auroras.live/v1/?type=archive&action=search&start=1am&end=1am&tz=-660`
+```json
+{
+    "2016-04-19 14:00:00": {
+        "Date": "2016-04-19 14:00:00",
+        "JulianDay": "57498",
+        "SecondsDay": "3600",
+        "Status": "0",
+        "Bx": "-0.7",
+        "By": "6.3",
+        "Bz": "0.4",
+        "Bt": "6.4",
+        "Lat": "3.5",
+        "Long": "95.9",
+        "ProtonDensity": "6.9",
+        "BulkSpeed": "352.7",
+        "IonTemperature": "3.09e+04",
+        "Date1Hour": "2016-04-20 13:00:00",
+        "Kp1Hour": "0.33",
+        "Date4Hour": "2016-04-20 16:00:00",
+        "Kp4Hour": "0.00",
+        "Kp": "1.00"
     }
-}</pre></div>
+}
+```
 
-<hr>
+-----------------------------------------------------
+## Images
+The images module caches and returns images from various webcams, charts, satellite and models.
 
-<h2>
-<a id="images-1" class="anchor" href="#images-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Images</h2>
+### Usage
 
-<p>The images module caches and returns images from various webcams, charts, satellite and models.</p>
+#### Example 1
+Retrieve a list of available images, including a list of available categories:
+`http://api.auroras.live/v1/?type=images&action=list`
 
-<h3>
-<a id="usage-5" class="anchor" href="#usage-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h3>
+_This example has been truncated, as there are many images to choose from_
 
-<h4>
-<a id="example-1-1" class="anchor" href="#example-1-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example 1</h4>
-
-<p>Retrieve a list of available images, including a list of available categories:
-<code>http://api.auroras.live/v1/?type=images&amp;action=list</code></p>
-
-<p><em>This example has been truncated, as there are many images to choose from</em></p>
-
-<div class="highlight highlight-source-json"><pre>{
-    <span class="pl-s"><span class="pl-pds">"</span>categories<span class="pl-pds">"</span></span>: {
-        <span class="pl-s"><span class="pl-pds">"</span>cam<span class="pl-pds">"</span></span>: {
-            <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Aurora Cameras<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>description<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Aurora Cameras from around the world<span class="pl-pds">"</span></span>
+```json
+{
+    "categories": {
+        "cam": {
+            "name": "Aurora Cameras",
+            "description": "Aurora Cameras from around the world"
         },
-        <span class="pl-s"><span class="pl-pds">"</span>satellite<span class="pl-pds">"</span></span>: {
-            <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Satellite Images<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>description<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Satellite Images and models based on satellite images<span class="pl-pds">"</span></span>
+        "satellite": {
+            "name": "Satellite Images",
+            "description": "Satellite Images and models based on satellite images"
         },
-        <span class="pl-s"><span class="pl-pds">"</span>chart<span class="pl-pds">"</span></span>: {
-            <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Charts and Graphs<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>description<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Charts and graphs, including magnetometers<span class="pl-pds">"</span></span>
+        "chart": {
+            "name": "Charts and Graphs",
+            "description": "Charts and graphs, including magnetometers"
         }
     },
-    <span class="pl-s"><span class="pl-pds">"</span>images<span class="pl-pds">"</span></span>: {
-        <span class="pl-s"><span class="pl-pds">"</span>cressy<span class="pl-pds">"</span></span>: {
-            <span class="pl-s"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>cressy<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Cressy Aurora Cam<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>description<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Aurora camera in Cressy, Tasmania<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>cache<span class="pl-pds">"</span></span>: <span class="pl-c1">180</span>,
-            <span class="pl-s"><span class="pl-pds">"</span>url<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http:<span class="pl-cce">\/\/</span>www.sws.bom.gov.au<span class="pl-cce">\/</span>Images<span class="pl-cce">\/</span>Geophysical<span class="pl-cce">\/</span>Aurora<span class="pl-cce">\/</span>Aurora%20Patrol%20Camera<span class="pl-cce">\/</span>latest.jpg<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>category<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>cam<span class="pl-pds">"</span></span>
+    "images": {
+        "cressy": {
+            "id": "cressy",
+            "name": "Cressy Aurora Cam",
+            "description": "Aurora camera in Cressy, Tasmania",
+            "cache": 180,
+            "url": "http:\/\/www.sws.bom.gov.au\/Images\/Geophysical\/Aurora\/Aurora%20Patrol%20Camera\/latest.jpg",
+            "category": "cam"
         },
-        <span class="pl-s"><span class="pl-pds">"</span>kevo<span class="pl-pds">"</span></span>: {
-            <span class="pl-s"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>kevo<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Kevo Aurora Cam<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>description<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Aurora camera in Kevo, Finland<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>cache<span class="pl-pds">"</span></span>: <span class="pl-c1">3000</span>,
-            <span class="pl-s"><span class="pl-pds">"</span>url<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http:<span class="pl-cce">\/\/</span>aurora.fmi.fi<span class="pl-cce">\/</span>public_service<span class="pl-cce">\/</span>latest_KEV.jpg<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>category<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>cam<span class="pl-pds">"</span></span>
+        "kevo": {
+            "id": "kevo",
+            "name": "Kevo Aurora Cam",
+            "description": "Aurora camera in Kevo, Finland",
+            "cache": 3000,
+            "url": "http:\/\/aurora.fmi.fi\/public_service\/latest_KEV.jpg",
+            "category": "cam"
         },
 
-<span class="pl-ii">[...]</span></pre></div>
+[...]
+```
 
-<h4>
-<a id="example-2-1" class="anchor" href="#example-2-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example 2</h4>
+#### Example 2
+Retrieve a specific image:
+`http://api.auroras.live/v1/?type=images&image=cressy`
 
-<p>Retrieve a specific image:
-<code>http://api.auroras.live/v1/?type=images&amp;image=cressy</code></p>
+![Cressy Webcam](http://beta.api.auroras.live/v1/?type=images&image=cressy)
 
-<p><img src="http://beta.api.auroras.live/v1/?type=images&amp;image=cressy" alt="Cressy Webcam"></p>
+-----------------------------------------------------
+## Weather
+The weather module retrieves current weather and / or 9 day, 3 hourly forecasts from met.no
 
-<hr>
+### Usage
+#### Example 1
+Retrieve the weather for Melbourne, Australia
+`http://api.auroras.live/v1/?type=weather&lat=-37.8594087&long=144.7994392`
 
-<h2>
-<a id="weather-1" class="anchor" href="#weather-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Weather</h2>
-
-<p>The weather module retrieves current weather and / or 9 day, 3 hourly forecasts from met.no</p>
-
-<h3>
-<a id="usage-6" class="anchor" href="#usage-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h3>
-
-<h4>
-<a id="example-1-2" class="anchor" href="#example-1-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example 1</h4>
-
-<p>Retrieve the weather for Melbourne, Australia
-<code>http://api.auroras.live/v1/?type=weather&amp;lat=-37.8594087&amp;long=144.7994392</code></p>
-
-<div class="highlight highlight-source-json"><pre>{
-    <span class="pl-s"><span class="pl-pds">"</span>temperature<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>20.7<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>cloud<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>39.1<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>rain<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.0<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>fog<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.0<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>symbol<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>3<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>sunrise<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-19T20:52:00Z<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>sunset<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-20T07:46:55Z<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>moonrise<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-20T06:56:50Z<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>moonset<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-19T18:43:32Z<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>moonphase<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Full moon<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>date<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-20T13:45:37+00:00<span class="pl-pds">"</span></span>,
-    <span class="pl-s"><span class="pl-pds">"</span>location<span class="pl-pds">"</span></span>: {
-        <span class="pl-s"><span class="pl-pds">"</span>lat<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>-37.8594087<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>long<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>144.7994392<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Altona<span class="pl-pds">"</span></span>
+```json
+{
+    "temperature": "20.7",
+    "cloud": "39.1",
+    "rain": "0.0",
+    "fog": "0.0",
+    "symbol": "3",
+    "sunrise": "2016-04-19T20:52:00Z",
+    "sunset": "2016-04-20T07:46:55Z",
+    "moonrise": "2016-04-20T06:56:50Z",
+    "moonset": "2016-04-19T18:43:32Z",
+    "moonphase": "Full moon",
+    "date": "2016-04-20T13:45:37+00:00",
+    "location": {
+        "lat": "-37.8594087",
+        "long": "144.7994392",
+        "name": "Altona"
     }
-}</pre></div>
+}
+```
 
-<h4>
-<a id="example-2-2" class="anchor" href="#example-2-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example 2</h4>
+#### Example 2
+Retrieve the 9 day weather forecast for Melbourne, Australia
+`http://api.auroras.live/v1/?type=weather&lat=-37.8594087&long=144.7994392&forecast=true`
 
-<p>Retrieve the 9 day weather forecast for Melbourne, Australia
-<code>http://api.auroras.live/v1/?type=weather&amp;lat=-37.8594087&amp;long=144.7994392&amp;forecast=true</code></p>
+_The example data has been truncated, as there are 9 days worth of forecasts_
 
-<p><em>The example data has been truncated, as there are 9 days worth of forecasts</em></p>
-
-<div class="highlight highlight-source-json"><pre>{
-    <span class="pl-s"><span class="pl-pds">"</span>2016-04-20T15:00:00+00:00<span class="pl-pds">"</span></span>: {
-        <span class="pl-s"><span class="pl-pds">"</span>temperature<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>20.7<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>cloud<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>39.1<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>rain<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.0<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>fog<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.0<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>symbol<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>3<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>sunrise<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-19T20:52:00Z<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>sunset<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-20T07:46:55Z<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>moonrise<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-20T06:56:50Z<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>moonset<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-19T18:43:32Z<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>moonphase<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Full moon<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>date<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-20T13:46:32+00:00<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>location<span class="pl-pds">"</span></span>: {
-            <span class="pl-s"><span class="pl-pds">"</span>lat<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>-37.8594087<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>long<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>144.7994392<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Altona<span class="pl-pds">"</span></span>
+```json
+{
+    "2016-04-20T15:00:00+00:00": {
+        "temperature": "20.7",
+        "cloud": "39.1",
+        "rain": "0.0",
+        "fog": "0.0",
+        "symbol": "3",
+        "sunrise": "2016-04-19T20:52:00Z",
+        "sunset": "2016-04-20T07:46:55Z",
+        "moonrise": "2016-04-20T06:56:50Z",
+        "moonset": "2016-04-19T18:43:32Z",
+        "moonphase": "Full moon",
+        "date": "2016-04-20T13:46:32+00:00",
+        "location": {
+            "lat": "-37.8594087",
+            "long": "144.7994392",
+            "name": "Altona"
         }
     },
-    <span class="pl-s"><span class="pl-pds">"</span>2016-04-20T18:00:00+00:00<span class="pl-pds">"</span></span>: {
-        <span class="pl-s"><span class="pl-pds">"</span>temperature<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>20.3<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>cloud<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>95.3<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>rain<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.0<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>fog<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.0<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>symbol<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>3<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>sunrise<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-19T20:52:00Z<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>sunset<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-20T07:46:55Z<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>moonrise<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-20T06:56:50Z<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>moonset<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-19T18:43:32Z<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>moonphase<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Full moon<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>date<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2016-04-20T13:46:32+00:00<span class="pl-pds">"</span></span>,
-        <span class="pl-s"><span class="pl-pds">"</span>location<span class="pl-pds">"</span></span>: {
-            <span class="pl-s"><span class="pl-pds">"</span>lat<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>-37.8594087<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>long<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>144.7994392<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Altona<span class="pl-pds">"</span></span>
+    "2016-04-20T18:00:00+00:00": {
+        "temperature": "20.3",
+        "cloud": "95.3",
+        "rain": "0.0",
+        "fog": "0.0",
+        "symbol": "3",
+        "sunrise": "2016-04-19T20:52:00Z",
+        "sunset": "2016-04-20T07:46:55Z",
+        "moonrise": "2016-04-20T06:56:50Z",
+        "moonset": "2016-04-19T18:43:32Z",
+        "moonphase": "Full moon",
+        "date": "2016-04-20T13:46:32+00:00",
+        "location": {
+            "lat": "-37.8594087",
+            "long": "144.7994392",
+            "name": "Altona"
         }
     },
-<span class="pl-ii">[...]</span></pre></div>
+[...]
+```
+### Required Parameters
 
-<h3>
-<a id="required-parameters-4" class="anchor" href="#required-parameters-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Required Parameters</h3>
+#### lat
+Integer. The latitude of the area you wish to obtain information for. Valid ranges are from `-90` to `90`
 
-<h4>
-<a id="lat-2" class="anchor" href="#lat-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>lat</h4>
+#### long
+Integer. The longitude of the area you wish to obtain information for. Valid ranges are from `-180` to `180`
 
-<p>Integer. The latitude of the area you wish to obtain information for. Valid ranges are from <code>-90</code> to <code>90</code></p>
+### Optional Parameters
 
-<h4>
-<a id="long-2" class="anchor" href="#long-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>long</h4>
+#### forecast
+Boolean. If true, includes the forecast, which is every 3 hours and 9 days long
 
-<p>Integer. The longitude of the area you wish to obtain information for. Valid ranges are from <code>-180</code> to <code>180</code></p>
+</xmp>
 
-<h3>
-<a id="optional-parameters-3" class="anchor" href="#optional-parameters-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Optional Parameters</h3>
-
-<h4>
-<a id="forecast-1" class="anchor" href="#forecast-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>forecast</h4>
-
-<p>Boolean. If true, includes the forecast, which is every 3 hours and 9 days long</p>
-
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/Grayda/developers.auroras.live">Developers.auroras.live</a> is maintained by <a href="https://github.com/Grayda">Grayda</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-    </section>
-
-  
-  </body>
+<script src="v/0.2/strapdown.js"></script>
 </html>
