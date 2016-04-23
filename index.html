@@ -18,8 +18,16 @@
   	- [Images](#images)
   	- [Weather](#weather)
 
-# Introduction
+## Introduction
 The auroras.live API allows you to obtain key aurora hunting information and access extensive data archives. It's also the system used by the auroras.live website, Pebble watch app and mobile apps
+
+-----------------------------------------------------
+## Privacy
+Certain parts of the API require that you provide valid location information in the form of latitude and longitude. These coordinates are sent to http://met.no to obtain weather.
+
+If you use the `all` module, your location is stored in the auroras.live API database. We store the latitude and longitude (rounded to three decimal places, meaning innacuracies of up to 100m), a numerical count, and the last time the `all` module was called from that location. No other data is stored, asides from this.
+
+Stored data is used internally to determine popular aurora hunting locations and is not available to users. The data is intentionally inaccurate to allow nearby popular spots to be grouped together (e.g. coastal areas in Australia, where users may be spaced along the same beach facing south)
 
 -----------------------------------------------------
 ## Usage
@@ -472,6 +480,55 @@ Retrieve a specific image:
 `http://api.auroras.live/v1/?type=images&image=cressy`
 
 ![Cressy Webcam](http://beta.api.auroras.live/v1/?type=images&image=cressy)
+
+-----------------------------------------------------
+## Locations
+The locations module deals with geographical information
+
+### Usage
+`http://api.auroras.live/v1/?type=locations`
+
+Calling the module returns a list of locations, which are known aurora hunting "hot spots"
+
+```json
+[
+    {
+        "id": "flinders",
+        "name": "Flinders",
+        "description": "Flinders, Victoria, Australia",
+        "subdivision": "Victoria",
+        "country": "Australia",
+        "lat": "-38.4817",
+        "long": "144.988"
+    },
+    {
+        "id": "inverloch",
+        "name": "Inverloch",
+        "description": "Eagle's Nest, Inverloch, Victoria, Australia",
+        "subdivision": "Victoria",
+        "country": "Australia",
+        "lat": "-38.6689",
+        "long": "145.669"
+    },
+    {
+        "id": "mounttassie",
+        "name": "Mount Tassie",
+        "description": "Mount Tassie, Victoria, Australia",
+        "subdivision": "Victoria",
+        "country": "Australia",
+        "lat": "-38.3888",
+        "long": "146.543"
+    },
+[...]
+```
+### Required Parameters
+There are no required parameters
+
+### Optional Parameters
+There are no optional parameters
+
+### Notes
+If you know of locations that would be suitable for the list, please email them to admin@auroras.live. Include the name of the location (e.g. Cape Schanck Lighthouse), a description (The Cape Schanck lighthouse near Rosebud, Victoria, Australia), the state / province / territory / etc. the location is in (e.g. Tasmania, or Quebec), the country (e.g. Canada) and the geographical coordinates (e.g. -43.5304567, 146.8025147)
 
 -----------------------------------------------------
 ## Weather
