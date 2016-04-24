@@ -25,7 +25,7 @@ The auroras.live API allows you to obtain key aurora hunting information and acc
 ## Privacy
 Certain parts of the API require that you provide valid location information in the form of latitude and longitude. These coordinates are sent to http://met.no to obtain weather.
 
-If you use the `all` module, your location is stored in the auroras.live API database. We store the latitude and longitude (rounded to three decimal places, meaning innacuracies of up to 100m), a numerical count, and the last time the `all` module was called from that location. No other data is stored, asides from this.
+If you use the `all` module, your location is stored in the auroras.live API database. We store the latitude and longitude (rounded to three decimal places, meaning innacuracies of up to 400m), a numerical count, and the last time the `all` module was called from that location. No other data is stored, asides from this.
 
 Stored data is used internally to determine popular aurora hunting locations and is not available to users. The data is intentionally inaccurate to allow nearby popular spots to be grouped together (e.g. coastal areas in Australia, where users may be spaced along the same beach facing south)
 
