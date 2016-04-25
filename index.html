@@ -1,34 +1,85 @@
 <!DOCTYPE html>
 <html>
+<head>
 <title>api.auroras.live Documentation</title>
-
+<style>
+  #nav {
+    position: fixed;
+    left: 2vw;
+  }
+</style>
+</head>
+<body>
 <xmp theme="cerulean" style="display:none;">
-  - [Introduction](#introduction)
-  	- [Usage](#usage)
-  	- [Important Messages](#important-messages)
-  	- [Dates](#dates)
-  	- [Timezones](#timezones)
-  	- [Formatting (BETA)](#formatting-beta)
-  	- [Colouring](#colouring)
-  - [Modules](#modules)
-  	- [All](#all)
-  	- [ACE](#ace)
-  	- [Embed](#embed)
-  	- [Archive](#archive)
-  	- [Images](#images)
-  	- [Weather](#weather)
+  <div id="nav">
+<!-- TOC depth:2 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-## Introduction
+- [Introduction](#introduction)
+	- [Links and resources](#links-and-resources)
+	- [Privacy](#privacy)
+	- [Attribution](#attribution)
+	- [Usage](#usage)
+	- [Important Messages](#important-messages)
+	- [Dates](#dates)
+	- [Timezones](#timezones)
+	- [Formatting (BETA)](#formatting-beta)
+	- [Colouring](#colouring)
+- [Modules](#modules)
+	- [All](#all)
+	- [ACE](#ace)
+	- [Embed](#embed)
+	- [Archive](#archive)
+	- [Images](#images)
+	- [Locations](#locations)
+	- [Weather](#weather)
+<!-- /TOC -->
+</div>
+<a name="introduction"></a>
+# Introduction
+
 The auroras.live API allows you to obtain key aurora hunting information and access extensive data archives. It's also the system used by the auroras.live website, Pebble watch app and mobile apps
 
+<a name="links-and-resources"></a>
+-----------------------------------------------------
+## Links and resources
+Website: http://auroras.live
+
+Twitter: [@auroras_live](http://twitter.com/auroras_live)
+
+Facebook: http://facebook.com/auroras.live
+
+Google+: https://plus.google.com/105935401682460898922
+
+<a name="privacy"></a>
 -----------------------------------------------------
 ## Privacy
 Certain parts of the API require that you provide valid location information in the form of latitude and longitude. These coordinates are sent to http://met.no to obtain weather.
 
 If you use the `all` module, your location is stored in the auroras.live API database. We store the latitude and longitude (rounded to three decimal places, meaning innacuracies of up to 400m), a numerical count, and the last time the `all` module was called from that location. No other data is stored, asides from this.
 
-Stored data is used internally to determine popular aurora hunting locations and is not available to users. The data is intentionally inaccurate to allow nearby popular spots to be grouped together (e.g. coastal areas in Australia, where users may be spaced along the same beach facing south)
+Stored data is used internally to determine popular aurora hunting locations and is _not_ available to users. The data is intentionally inaccurate to allow nearby popular spots to be grouped together (e.g. coastal areas in Australia, where users may be spaced along the same beach facing south)
 
+<a name="attribution"></a>
+-----------------------------------------------------
+## Attribution
+
+The auroras.live API is presently free to use. In order to use this service, you must attribute auroras.live as the source of the information, but not in such a way that implies that auroras.live endorses or is the author of the product. As is the case with `cron`, auroras.live is to be capitalised when at the start of a sentence, and is lowercase otherwise. Acceptible attribution includes:
+
+`Powered by auroras.live`
+
+`Information via auroras.live`
+
+Unacceptable attribution includes:
+
+`Written by auroras.live`
+
+`An auroras.live app`
+
+The attribution should be easily findable by users (e.g. in the footer of the page, or under a Help > About menu, for example)
+
+To obtain a copy of the logo for embedding purposes (e.g. dynamically generated images), please email `admin [at] auroras.live`
+
+<a name="usage"></a>
 -----------------------------------------------------
 ## Usage
 
@@ -42,6 +93,7 @@ Data can be passed to the API via GET or POST, using the endpoints listed below
 
 The current version of the API is `v1`. Breaking changes will cause a version bump (e.g. `v2`), while feature additions will _not_
 
+<a name="important-messages"></a>
 -----------------------------------------------------
 ## Important Messages
 Please keep an eye on this website for information about the API. Important information will also be included along with any data retrieved from the API.
@@ -64,10 +116,12 @@ Please keep an eye on this website for information about the API. Important info
 ### Returns
 Array. The requested data will return, **if present**, important messages in the form of an array.
 
+<a name="dates"></a>
 -----------------------------------------------------
 ## Dates
 All data returned will include a `date` property, offset by whatever timezone you pass to it (see the section on Timezones below)
 
+<a name="timezones"></a>
 -----------------------------------------------------
 ## Timezones
 By default, all dates and times returned are in UTC. By appending `tz` to your request and passing an offset, in minutes, you can convert most of these times and dates into your local timezone. If you're accessing the API via Javascript (e.g. an AngularJS app), you can simply use `new Date().getTimezoneOffset()` to obtain the offset.
@@ -84,6 +138,7 @@ By default, all dates and times returned are in UTC. By appending `tz` to your r
 ### Returns
 Date. The timestamp will be offset based on `tz`
 
+<a name="formatting-beta"></a>
 -----------------------------------------------------
 ## Formatting (BETA)
 By default, data will be returned as JSON. If you wish to return the data as XML, simply append `format=xml` to your request. Note that this won't work on all modules, especially the `threeday` portion of the `ace` module, as the generated fields contain illegal keys
@@ -101,6 +156,7 @@ By default, data will be returned as JSON. If you wish to return the data as XML
 ### Returns
 The data as XML.
 
+<a name="colouring"></a>
 -----------------------------------------------------
 ## Colouring
 Many modules will return a colour along with the information. This allows users to know what the returned values actually mean (e.g. green = no activity, red = lots of activity). It's also designed to allow programmers to set colours without having to code in lenghthy `switch` statements.
@@ -145,9 +201,11 @@ Below is a table showing how the colours are determined:
 | Nowcast | >= 25   | < 50    | `yellow`    | `#FFFF00`  | `rgb(255,255,0)` |
 | Nowcast | >= 0    | < 25    | `green`     | `#00FF00`  | `rgb(0,255,0)`   |
 
+<a name="modules"></a>
 # Modules
 The API consists of a few modules that you can access.
 
+<a name="all"></a>
 -----------------------------------------------------
 ## All
 The "all" module combines a variety of information that a typical site would use. This saves on multiple API calls. Information return by default includes:
@@ -197,6 +255,7 @@ Boolean. Defaults to `false`. If `true`, includes a list of possible webcam, cha
 #### probability
 Boolean. Defaults to `true`. If `false`, omits the SWPC "nowcast" probability data
 
+<a name="ace"></a>
 -----------------------------------------------------
 ## ACE
 The ACE module returns information obtained from the ACE spacecraft, plus the "nowcast" probability data. Future versions of this API will separate nowcast into a separate set of data
@@ -247,6 +306,7 @@ Integer. The latitude of the location you wish to retrieve probability info for.
 #### long
 Integer. The longitude of the location you wish to retrieve probability info for. Valid ranges are from `-180` to `180`. **Only necessary if requesting probability data**
 
+<a name="embed"></a>
 -----------------------------------------------------
 ## Embed
 The embed module returns an image containing various ACE data, allowing the information to be embedded in a forum signature, website etc. You have the option of using current data, or passing in custom values (to show data for a moment in time, for example)
@@ -289,6 +349,7 @@ Integer. The 1 hour Kp forecast to show. **Required if the `bz` parameter is pas
 #### date
 String. The date to show at the top of the image. **MUST be a valid PHP date (e.g. "now", "midnight yesterday", "2013-01-01 00:00")**. **Required if the `bz` parameter is passed**
 
+<a name="archive"></a>
 -----------------------------------------------------
 ## Archive
 The Archive module lets you search through previous years' data. Due to the amount of data stored, you can only search for three days worth of data in a single call.
@@ -426,6 +487,7 @@ When `tz` is set, your start and end dates are converted to UTC, and the results
 }
 ```
 
+<a name="images"></a>
 -----------------------------------------------------
 ## Images
 The images module caches and returns images from various webcams, charts, satellite and models.
@@ -483,6 +545,7 @@ Retrieve a specific image:
 
 ![Cressy Webcam](http://beta.api.auroras.live/v1/?type=images&image=cressy)
 
+<a name="locations"></a>
 -----------------------------------------------------
 ## Locations
 The locations module deals with geographical information
@@ -532,9 +595,12 @@ There are no optional parameters
 ### Notes
 If you know of locations that would be suitable for the list, please email them to admin@auroras.live. Include the name of the location (e.g. Cape Schanck Lighthouse), a description (The Cape Schanck lighthouse near Rosebud, Victoria, Australia), the state / province / territory / etc. the location is in (e.g. Tasmania, or Quebec), the country (e.g. Canada) and the geographical coordinates (e.g. -43.5304567, 146.8025147)
 
+<a name="weather"></a>
 -----------------------------------------------------
 ## Weather
-The weather module retrieves current weather and / or 9 day, 3 hourly forecasts from met.no
+The weather module retrieves current weather and / or 9 day, 3 hourly forecasts.
+
+Weather data is provided by http://met.no (formerly yr.no)
 
 ### Usage
 #### Example 1
@@ -624,4 +690,5 @@ Boolean. If true, includes the forecast, which is every 3 hours and 9 days long
 </xmp>
 
 <script src="v/0.2/strapdown.js"></script>
+</body>
 </html>
