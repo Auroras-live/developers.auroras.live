@@ -163,6 +163,10 @@ Many modules will return a colour along with the information. This allows users 
 
 If you wish to change the format of the colours, simply append `colour=` to your request along with `hex` or `rgb` to return the colours in that format. **Please take note of spelling, as the API uses British English, so _colour_ as opposed to _color_**
 
+### Valid values
+ - `hex` - Hexadecimal code, such as `#FF0000`
+ - `rgb` - An RGB value, such as `rgba(255,0,0)`
+
 ### Example
 `http://api.auroras.live/v1/?type=ace&data=bz&colour=hex`
 ```json
@@ -230,10 +234,10 @@ To see what data is returned, see the examples in the `ace` and `weather` module
 ### Required Parameters
 
 #### lat
-Integer. The latitude of the area you wish to obtain information for. Valid ranges are from `-90` to `90`
+Float. The latitude of the area you wish to obtain information for. Valid ranges are from `-90` to `90`
 
 #### long
-Integer. The longitude of the area you wish to obtain information for. Valid ranges are from `-180` to `180`
+Float. The longitude of the area you wish to obtain information for. Valid ranges are from `-180` to `180`
 
 ### Optional parameters
 
@@ -309,20 +313,53 @@ Integer. The longitude of the location you wish to retrieve probability info for
 <a name="embed"></a>
 -----------------------------------------------------
 ## Embed
-The embed module returns an image containing various ACE data, allowing the information to be embedded in a forum signature, website etc. You have the option of using current data, or passing in custom values (to show data for a moment in time, for example)
+The embed module returns an image containing various data, allowing the information to be embedded in a forum signature, website etc. You have the option of embedding current data, or embedding the current weather for a location.
 
 ### Usage
-`http://api.auroras.live/v1/?type=embed&size=normal`
+`http://api.auroras.live/v1/?type=embed&image=current&size=regular`
 
-![Current ACE data](http://beta.api.auroras.live/v1/?type=embed&size=normal)
+`http://api.auroras.live/v1/?type=embed&image=weather&size=regular&lat=51.521793&long=-0.1877991`
+
+![Current ACE data](http://beta.api.auroras.live/v1/?type=embed&image=current&size=regular)
+
+![Current weather for London](http://beta.api.auroras.live/v1/?type=embed&image=weather&size=regular&lat=51.521793&long=-0.1877991)
 
 ### Returns
 A PNG file containing the current data in a ready-to-embed format
 
 ### Required Parameters
-There are no required parameters
+
+#### lat
+Float. The latitude of the area you wish to obtain information for. Valid ranges are from `-90` to `90`. **Required if `image` is set to `weather`**
+
+#### long
+Float. The longitude of the area you wish to obtain information for. Valid ranges are from `-180` to `180`. **Required if `image` is set to `weather`**
+
+#### bz
+Integer. The Bz value to show. **If this parameter is passed, then you MUST pass all other optional parameters below!**
+
+#### speed
+Integer. The speed to show. **Required if the `bz` parameter is passed AND `image` is `current`**
+
+#### density
+Integer. The density to show. **Required if the `bz` parameter is passed AND `image` is `current`**
+
+#### kp
+Integer. The Kp to show. **Required if the `bz` parameter is passed AND `image` is `current`**
+
+#### kp1hour
+Integer. The 1 hour Kp forecast to show. **Required if the `bz` parameter is passed AND `image` is `current`**
+
+#### date
+String. The date to show at the top of the image. **MUST be a valid PHP date (e.g. "now", "midnight yesterday", "2013-01-01 00:00")**. **Required if the `bz` parameter is passed AND `image` is `current`**
 
 ### Optional Parameters
+
+#### image
+String. The type of image to return. Valid values are:
+
+- current (Current aurora data, such as Kp, Bz etc.)
+- weather (Weather for the specified location)
 
 #### size
 String. Defaults to "regular" (actually defaults to "none" internally, for analytics purposes). Used to show one of three possible sizes:
@@ -330,24 +367,6 @@ String. Defaults to "regular" (actually defaults to "none" internally, for analy
  - `regular` (450x250)
  - `small` (338x188)
  - `xsmall` (254x141)
-
-#### bz
-Integer. The Bz value to show. **If this parameter is passed, then you MUST pass all other optional parameters below!**
-
-#### speed
-Integer. The speed to show. **Required if the `bz` parameter is passed**
-
-#### density
-Integer. The density to show. **Required if the `bz` parameter is passed**
-
-#### kp
-Integer. The Kp to show. **Required if the `bz` parameter is passed**
-
-### kp1hour
-Integer. The 1 hour Kp forecast to show. **Required if the `bz` parameter is passed**
-
-#### date
-String. The date to show at the top of the image. **MUST be a valid PHP date (e.g. "now", "midnight yesterday", "2013-01-01 00:00")**. **Required if the `bz` parameter is passed**
 
 <a name="archive"></a>
 -----------------------------------------------------
@@ -677,10 +696,10 @@ _The example data has been truncated, as there are 9 days worth of forecasts_
 ### Required Parameters
 
 #### lat
-Integer. The latitude of the area you wish to obtain information for. Valid ranges are from `-90` to `90`
+Float. The latitude of the area you wish to obtain information for. Valid ranges are from `-90` to `90`
 
 #### long
-Integer. The longitude of the area you wish to obtain information for. Valid ranges are from `-180` to `180`
+Float. The longitude of the area you wish to obtain information for. Valid ranges are from `-180` to `180`
 
 ### Optional Parameters
 
