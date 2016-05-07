@@ -256,6 +256,9 @@ Boolean. Defaults to `true`. If `false`, omits the three day Kp forecast from th
 #### images
 Boolean. Defaults to `false`. If `true`, includes a list of possible webcam, chart and satellite images, along with category data.
 
+#### archive
+Boolean. Defaults to `false`. If `true`, includes statistics about the auroras.live archive (e.g. start, end, size etc.)
+
 #### probability
 Boolean. Defaults to `true`. If `false`, omits the SWPC "nowcast" probability data
 
@@ -286,6 +289,18 @@ The ACE module returns information obtained from the ACE spacecraft, plus the "n
 }
 ```
 
+`http://api.auroras.live/v1/?type=ace&data=probability&lat=0&long=0`
+```json
+{
+    "date": "2016-05-07T04:03:44+00:00",
+    "colour": "green",
+    "id": "96577",
+    "lat": "-56.6016",
+    "long": "-66.7969",
+    "value": "20"
+}
+```
+
 ### Returns
 A JSON string that contains the date, Bz, density, speed, Kp data, as well as colour information relating to the current space weather
 
@@ -305,10 +320,18 @@ String. The type of data that you wish to retrieve. Valid values include:
 ### Optional Parameters
 
 #### lat
-Integer. The latitude of the location you wish to retrieve probability info for. Valid ranges are from `-90` to `90`. **Only necessary if requesting probability data**
+Integer. The latitude of the location you wish to retrieve probability info for. Valid ranges are from `-90` to `90`. **Only required if requesting probability data**
+
+ - If `lat` is set to `all`, then probability data for all locations on earth are returned as JSON. **This data is approximately 2.2mb in size (as it contains nearly 525,000 records) so don't use it unless necessary
+ - If `lat` is set to `list`, then probability data for all locations on earth returned, where the probability is > 1%
 
 #### long
-Integer. The longitude of the location you wish to retrieve probability info for. Valid ranges are from `-180` to `180`. **Only necessary if requesting probability data**
+Integer. The longitude of the location you wish to retrieve probability info for. Valid ranges are from `-180` to `180`. **Only required if requesting probability data**
+
+ - If `lat` is set to either `all` or `list`, this value is still required, but is ignored
+
+ #### radius
+ Integer. Defines how far the probability module should look for the highest percentage. Defaults to `9` (degrees), which means the module will look in a 9 degree radius (approx. 1000km) for the best percent. 1000km is the furtherest you can be from an overhead aurora, and still see it.
 
 <a name="embed"></a>
 -----------------------------------------------------
