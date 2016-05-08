@@ -7,10 +7,29 @@
     position: fixed;
     left: 2vw;
   }
+  pre, code {
+
+    background: #2c3035 !important;
+  }
+
+  .pln { color: #fff !important; }  /* plain text */
+  .str { color: #fff !important; }  /* string content */
+  .kwd { color: #fff !important; }  /* a keyword */
+  .com { color: #fff !important; }  /* a comment */
+  .typ { color: #fff !important; }  /* a type name */
+  .lit { color: #fff !important; }  /* a literal value */
+  /* punctuation, lisp open bracket, lisp close bracket */
+  .pun, .opn, .clo { color: #fff !important; }
+  .tag { color: #fff !important; }  /* a markup tag name */
+  .atn { color: #fff !important; }  /* a markup attribute name */
+  .atv { color: #fff !important; }  /* a markup attribute value */
+  .dec, .var { color: #fff !important; }  /* a declaration; a variable name */
+  .fun { color: #fff !important; }  /* a function name */
+
 </style>
 </head>
 <body>
-<xmp theme="cerulean" style="display:none;">
+<xmp theme="slate" style="display:none;">
   <div id="nav">
 <!-- TOC depth:2 withLinks:1 updateOnSave:1 orderedList:0 -->
 
@@ -37,7 +56,9 @@
 <a name="introduction"></a>
 # Introduction
 
-The auroras.live API allows you to obtain key aurora hunting information and access extensive data archives. It's also the system used by the auroras.live website, Pebble watch app and mobile apps
+The auroras.live API allows you to obtain key aurora hunting information and access extensive data archives. It's also the system used by the auroras.live website, Pebble watch app and mobile apps.
+
+This document is still in beta. Examples, URLs and parameters are extremely dangerous and may attack at any time. I am dealing with it. 
 
 <a name="links-and-resources"></a>
 -----------------------------------------------------
@@ -394,7 +415,9 @@ String. Defaults to "regular" (actually defaults to "none" internally, for analy
 <a name="archive"></a>
 -----------------------------------------------------
 ## Archive
-The Archive module lets you search through previous years' data. Due to the amount of data stored, you can only search for three days worth of data in a single call.
+The Archive module lets you search through previous years' data. Due to the amount of data stored and transmitted, you can only search for **three days** worth of data in a single call.
+
+If you require more than three days worth of data, you can do multiple calls, but don't do this to download large sets of data. If you need large sets of data (over two weeks), please contact [mailto:admin@auroras.live](admin@auroras.live) for a MySQL dump
 
 ### Usage
 
@@ -414,50 +437,69 @@ Obtaining statistics about the archive
 (NB: Size is in megabytes)
 
 #### Example 2
-Obtaining archive data for the February 1st 2016, between midnight and 1am
-`http://api.auroras.live/v1/?type=archive&action=search&start=2016-02-01T00:00&end=2016-02-01T01:00`
-
-_This example is truncated, as the data continues on until `end` has been reached_
+Obtaining archive data for today, between 1am and 1:01am
+`http://api.auroras.live/v1/?type=archive&action=search&start=1am&end=1:01am`
 
 ```json
 {
-    "2016-02-01 00:00:00": {
-        "Date": "2016-02-01 00:00:00",
-        "JulianDay": "57419",
-        "SecondsDay": "0",
-        "Status": "0",
-        "Bx": "4.2",
-        "By": "4.8",
-        "Bz": "-5.8",
-        "Bt": "8.7",
-        "Lat": "-42.1",
-        "Long": "48.9",
-        "ProtonDensity": "4.4",
-        "BulkSpeed": "303.1",
-        "IonTemperature": "3.33e+04",
-        "Date1Hour": "2016-02-01 01:00:00",
-        "Kp1Hour": "1.67",
-        "Date4Hour": "2016-02-01 04:00:00",
-        "Kp4Hour": "1.67",
-        "Kp": "1.67"
-    },
-    "2016-02-01 00:01:00": {
-        "Date": "2016-02-01 00:01:00",
-        "JulianDay": "57419",
-        "SecondsDay": "60",
-        "Status": "0",
-        "Bx": "4.4",
-        "By": "4.6",
-        "Bz": "-5.9",
-        "Bt": "8.7",
-        "Lat": "-42.7",
-        "Long": "45.9",
-        "ProtonDensity": "4.2",
-        "BulkSpeed": "303.0",
-        "IonTemperature": "3.59e+04"
-    },
-
-    [...]
+    "date": "2016-05-08T06:28:42+00:00",
+    "mag": [
+        {
+            "Date": "2016-05-08 01:00:00",
+            "JulianDay": "57516",
+            "SecondsDay": "3600",
+            "Status": "0",
+            "Bx": "6.1",
+            "By": "5.7",
+            "Bz": "-10.4",
+            "Bt": "13.3",
+            "Lat": "-51.3",
+            "Long": "42.8"
+        },
+        {
+            "Date": "2016-05-08 01:01:00",
+            "JulianDay": "57516",
+            "SecondsDay": "3660",
+            "Status": "0",
+            "Bx": "6.1",
+            "By": "5.7",
+            "Bz": "-10.5",
+            "Bt": "13.4",
+            "Lat": "-51.5",
+            "Long": "43.2"
+        }
+    ],
+    "swe": [
+        {
+            "Date": "2016-05-08 01:00:00",
+            "JulianDay": "57516",
+            "SecondsDay": "3600",
+            "Status": "0",
+            "ProtonDensity": "13.4",
+            "BulkSpeed": "501.8",
+            "IonTemperature": "1.19e+05"
+        },
+        {
+            "Date": "2016-05-08 01:01:00",
+            "JulianDay": "57516",
+            "SecondsDay": "3660",
+            "Status": "1",
+            "ProtonDensity": "14.0",
+            "BulkSpeed": "506.9",
+            "IonTemperature": "1.37e+05"
+        }
+    ],
+    "kp": [
+        {
+            "Date": "2016-05-08 01:00:00",
+            "Date1Hour": "2016-05-08 02:00:00",
+            "Kp1Hour": "2.33",
+            "Date4Hour": "2016-05-08 05:00:00",
+            "Kp4Hour": "2.67",
+            "Kp": "3.00"
+        }
+    ]
+}
 ```
 
 ### Required Parameters
