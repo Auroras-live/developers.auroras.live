@@ -79,11 +79,13 @@ Google+: https://plus.google.com/105935401682460898922
 <a name="privacy"></a>
 -----------------------------------------------------
 ## Privacy
-Certain parts of the API require that you provide valid location information in the form of latitude and longitude. These coordinates are sent to http://met.no to obtain weather.
+Certain parts of this API require that you provide a valid location in the form of latitude and longitude. This information is used for internal analytics purposes, and to provide you weather.
 
-If you use the `all` module, your location is stored in the auroras.live API database. We store the latitude and longitude (rounded to three decimal places, meaning innacuracies of up to 400m), a numerical count, and the last time the `all` module was called from that location. No other data is stored, asides from this.
+Your (fine) location is sent to http://met.no to obtain weather for your present location. This fine location is _not_ stored by Auroras.live.
 
-Stored data is used internally to determine popular aurora hunting locations and is _not_ available to users. The data is intentionally inaccurate to allow nearby popular spots to be grouped together (e.g. coastal areas in Australia, where users may be spaced along the same beach facing south)
+If you or the app you are using makes use of the `all` module (which is used by, but is not limited to: the Pebble watch app, the mobile apps and the website), then your location is rounded to three decimal places and stored in the Auroras.live API database along with a numerical count and the first and last time this location was visited. This stored location is intentionally inaccurate (by up to 400m) to allow similar locations to be grouped together (e.g. users photographing around a lake can be counted as one location) and is used internally to help improve various Auroras.live products. No personal information is stored alongside these locations
+
+This information may be released to users in the form of a static image (e.g. a small world map showing popular locations), a text post on social media (e.g. "We have 300 users in Tasmania"), or released via the app / website as an aurora hunting location, as long as the location is in a public place. Locations that aren't aurora hunting locations may be filtered out.
 
 <a name="attribution"></a>
 -----------------------------------------------------
