@@ -702,22 +702,29 @@ Retrieve the weather for Melbourne, Australia
 
 ```json
 {
-    "temperature": "20.7",
-    "cloud": "39.1",
-    "rain": "0.0",
-    "fog": "0.0",
-    "symbol": "3",
-    "sunrise": "2016-04-19T20:52:00Z",
-    "sunset": "2016-04-20T07:46:55Z",
-    "moonrise": "2016-04-20T06:56:50Z",
-    "moonset": "2016-04-19T18:43:32Z",
-    "moonphase": "Full moon",
-    "date": "2016-04-20T13:45:37+00:00",
-    "location": {
-        "lat": "-37.8594087",
-        "long": "144.7994392",
-        "name": "Altona"
-    }
+	"temperature": "9.7",
+	"cloud": "18.8",
+	"rain": "0.7",
+	"humidity": "65.7",
+	"fog": "0.0",
+	"symbol": "40",
+	"wind": {
+		"speed": 25.2,
+		"direction": "W"
+	},
+	"sunrise": "2016-10-03T19:51:46Z",
+	"sunset": "2016-10-04T08:27:51Z",
+	"moonrise": "2016-10-03T21:40:24Z",
+	"moonset": "2016-10-04T11:21:19Z",
+	"moonphase": "Waxing crescent",
+	"date": "2016-10-04T06:45:37+00:00",
+	"location": {
+		"lat": "-37.8594087",
+		"long": "144.7994392",
+		"name": "Altona",
+		"state": "Victoria",
+		"country": "AU"
+	}
 }
 ```
 
@@ -729,42 +736,81 @@ _The example data has been truncated, as there are 9 days worth of forecasts_
 
 ```json
 {
-    "2016-04-20T15:00:00+00:00": {
-        "temperature": "20.7",
-        "cloud": "39.1",
-        "rain": "0.0",
-        "fog": "0.0",
-        "symbol": "3",
-        "sunrise": "2016-04-19T20:52:00Z",
-        "sunset": "2016-04-20T07:46:55Z",
-        "moonrise": "2016-04-20T06:56:50Z",
-        "moonset": "2016-04-19T18:43:32Z",
-        "moonphase": "Full moon",
-        "date": "2016-04-20T13:46:32+00:00",
-        "location": {
-            "lat": "-37.8594087",
-            "long": "144.7994392",
-            "name": "Altona"
-        }
-    },
-    "2016-04-20T18:00:00+00:00": {
-        "temperature": "20.3",
-        "cloud": "95.3",
-        "rain": "0.0",
-        "fog": "0.0",
-        "symbol": "3",
-        "sunrise": "2016-04-19T20:52:00Z",
-        "sunset": "2016-04-20T07:46:55Z",
-        "moonrise": "2016-04-20T06:56:50Z",
-        "moonset": "2016-04-19T18:43:32Z",
-        "moonphase": "Full moon",
-        "date": "2016-04-20T13:46:32+00:00",
-        "location": {
-            "lat": "-37.8594087",
-            "long": "144.7994392",
-            "name": "Altona"
-        }
-    },
+	"2016-10-04T09:00:00+00:00": {
+		"temperature": "9.7",
+		"cloud": "18.8",
+		"rain": "0.7",
+		"humidity": "65.7",
+		"fog": "0.0",
+		"symbol": "40",
+		"wind": {
+			"speed": 25.2,
+			"direction": "W"
+		},
+		"sunrise": "2016-10-03T19:51:46Z",
+		"sunset": "2016-10-04T08:27:51Z",
+		"moonrise": "2016-10-03T21:40:24Z",
+		"moonset": "2016-10-04T11:21:19Z",
+		"moonphase": "Waxing crescent",
+		"date": "2016-10-04T06:46:29+00:00",
+		"location": {
+			"lat": "-37.8594087",
+			"long": "144.7994392",
+			"name": "Altona",
+			"state": "Victoria",
+			"country": "AU"
+		}
+	},
+	"2016-10-04T12:00:00+00:00": {
+		"temperature": "9.1",
+		"cloud": "8.6",
+		"rain": "0.0",
+		"humidity": "67.4",
+		"fog": "0.0",
+		"symbol": "2",
+		"wind": {
+			"speed": 21.6,
+			"direction": "W"
+		},
+		"sunrise": "2016-10-03T19:51:46Z",
+		"sunset": "2016-10-04T08:27:51Z",
+		"moonrise": "2016-10-03T21:40:24Z",
+		"moonset": "2016-10-04T11:21:19Z",
+		"moonphase": "Waxing crescent",
+		"date": "2016-10-04T06:46:29+00:00",
+		"location": {
+			"lat": "-37.8594087",
+			"long": "144.7994392",
+			"name": "Altona",
+			"state": "Victoria",
+			"country": "AU"
+		}
+	},
+	"2016-10-04T15:00:00+00:00": {
+		"temperature": "8.7",
+		"cloud": "0.0",
+		"rain": "0.0",
+		"humidity": "66.1",
+		"fog": "0.0",
+		"symbol": "1",
+		"wind": {
+			"speed": 18,
+			"direction": "W"
+		},
+		"sunrise": "2016-10-03T19:51:46Z",
+		"sunset": "2016-10-04T08:27:51Z",
+		"moonrise": "2016-10-03T21:40:24Z",
+		"moonset": "2016-10-04T11:21:19Z",
+		"moonphase": "Waxing crescent",
+		"date": "2016-10-04T06:46:29+00:00",
+		"location": {
+			"lat": "-37.8594087",
+			"long": "144.7994392",
+			"name": "Altona",
+			"state": "Victoria",
+			"country": "AU"
+		}
+	},
 [...]
 ```
 ### Required Parameters
